@@ -9,5 +9,4 @@ public abstract class Entity{
     public abstract int getYPos();
     public abstract int getXSpeed();
     public abstract int getYSpeed();
-
 }
