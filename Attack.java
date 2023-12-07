@@ -1,5 +1,5 @@
 public class Attack{
-    private double attackDelay;
+    private int attackDelay;
     private int attackDamage;
     private int splashRadius;
     private int chainLength;
@@ -8,13 +8,15 @@ public class Attack{
     private double freezeChance;
     private int burnDamage;
     private int burnDuration;
+    
+    private int timeUntilAttack;
 
-    public Attack(double delay, int dmg){
+    public Attack(int delay, int dmg){
         this.attackDelay = delay;
         this.attackDamage = dmg;
     }
 
-    public double getAttackDelay(){
+    public int getAttackDelay(){
         return this.attackDelay;
     }
     public int getAttackDamage(){
@@ -42,7 +44,7 @@ public class Attack{
         return this.burnDuration;
     }
 
-    public void setAttackDelay(double delay){
+    public void setAttackDelay(int delay){
         this.attackDelay = delay;
     }
     public void setAttackDamage(int dmg){
@@ -70,5 +72,15 @@ public class Attack{
     }
     public void setBurnDuration(int duration){
         this.burnDuration = duration;
+    }
+
+    public int getTimeUntilAttack(){
+        return this.timeUntilAttack;
+    }
+    public void setTimeUntilAttack(int time){
+        this.timeUntilAttack = time;
+    }
+    public void decrementTime(){
+        this.timeUntilAttack--;
     }
 }

@@ -1,12 +1,12 @@
 public class ContraryLeafStorm extends HitScanAttack{
     public ContraryLeafStorm(){
-        super(10, 0.25);
+        super(250, 10);
     }
     @Override
     public void cast(Enemy target){
         target.takeDamage(getAttackDamage());
-        if(getAttackDelay() >= 0.0625){
-            setAttackDelay(getAttackDelay() * 0.9);
+        if(getAttackDelay() >= 50){
+            setAttackDelay((int) (getAttackDelay() * 0.9));
         }
     }
 }

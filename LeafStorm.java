@@ -1,5 +1,5 @@
 public class LeafStorm extends HitScanAttack{
     public LeafStorm(){
-        super(10, 0.25);
+        super(250, 10);
     }
 }
