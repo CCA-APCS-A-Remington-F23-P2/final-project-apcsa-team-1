@@ -4,9 +4,40 @@ public abstract class Entity{
     private int xSpeed;
     private int ySpeed;
 
+    public Entity(int mhp, int speed, int xp, int yp){
+        xPos = x;
+        yPos = y;
+        xSpeed = xS;
+        ySpeed = yS;
+    }
+
     public abstract boolean didCollide(Entity other);
-    public abstract int getXPos();
-    public abstract int getYPos();
-    public abstract int getXSpeed();
-    public abstract int getYSpeed();
+    public void move(){
+        xPos += xSpeed;
+        yPos += ySpeed;
+    }
+    public int getXPos(){
+        return xPos;
+    }
+    public int getYPos(){
+        return yPos;
+    }
+    public int getXSpeed(){
+        return xSpeed;
+    }
+    public int getYSpeed(){
+        return ySpeed;
+    }
+    public void setXPos(int s){
+        xPos = s;
+    }
+    public void setYPos(int s){
+        yPos = s;
+    }
+    public void setXSpeed(int s){
+        xSpeed = s;
+    }
+    public void setYSpeed(int s){
+        ySpeed = s;
+    }
 }
