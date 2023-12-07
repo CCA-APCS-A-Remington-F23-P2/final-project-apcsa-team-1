@@ -1,9 +1,8 @@
-public class Waterfall extends HitScanAttack{
-    public Waterfall(){
-        super(750, 40);
-        setSplashRadius(50);
+public class MegaWaterfall extends HitScanAttack{
+    public MegaWaterfall(){
+        super(500, 80);
+        setStunDuration(300);
     }
-    
     @Override
     public void cast(Tower t, List enemyList){
         int xPos = t.getXPos();
@@ -14,6 +13,7 @@ public class Waterfall extends HitScanAttack{
             int distance = Math.sqrt((xPos - eX)^2 + (yPos - eY)^2);
             if(distance < getSplashRadius()){
                 e.takeDamage(getAttackDamage());
+                e.setStunCounter(getStunDuration());
             }
         }
     }

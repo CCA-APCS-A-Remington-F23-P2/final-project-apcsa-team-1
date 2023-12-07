@@ -5,9 +5,11 @@ public class Attack{
     private int chainLength;
     private int chainDistance;
     private double slowAmount;
+    private int slowDuration;
     private double freezeChance;
     private int burnDamage;
     private int burnDuration;
+    private int stunDuration;
     
     private int timeUntilAttack;
 
@@ -34,6 +36,9 @@ public class Attack{
     public double getSlowAmount(){
         return this.slowAmount;
     }
+    public int getSlowDuration(){
+        return this.slowDuration;
+    }
     public double getFreezeChance(){
         return this.freezeChance;
     }
@@ -42,6 +47,9 @@ public class Attack{
     }
     public int getBurnDuration(){
         return this.burnDuration;
+    }
+    public int getStunDuration(){
+        return this.stunDuration;
     }
 
     public void setAttackDelay(int delay){
@@ -64,6 +72,11 @@ public class Attack{
     public void setSlowAmount(double amt){
         this.slowAmount = amt;
     }
+
+    public void setSlowDuration(int amt){
+        this.slowDuration = amt;
+    }
+
     public void setFreezeChance(double chance){
         this.freezeChance = chance;
     }
@@ -72,6 +85,9 @@ public class Attack{
     }
     public void setBurnDuration(int duration){
         this.burnDuration = duration;
+    }
+    public void setStunDuration(int duration){
+        this.stunDuration = duration;
     }
 
     public int getTimeUntilAttack(){
