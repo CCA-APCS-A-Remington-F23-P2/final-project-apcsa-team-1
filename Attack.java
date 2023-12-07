@@ -3,6 +3,7 @@ public class Attack{
     private int attackDamage;
     private int splashRadius;
     private int chainLength;
+    private int chainDistance;
     private double slowAmount;
     private double freezeChance;
     private int burnDamage;
@@ -22,7 +23,10 @@ public class Attack{
     public int getSplashRadius(){
         return this.splashRadius;    
     }
-    public int getchainLength(){
+    public int getChainDistance(){
+        return this.chainDistance;
+    }
+    public int getChainLength(){
         return this.chainLength;
     }
     public double getSlowAmount(){
@@ -50,6 +54,11 @@ public class Attack{
     public void setChainLength(int length){
         this.chainLength = length;
     }
+
+    public void setChainDistance(int distance){
+        this.chainDistance = distance;
+    }
+
     public void setSlowAmount(double amt){
         this.slowAmount = amt;
     }
