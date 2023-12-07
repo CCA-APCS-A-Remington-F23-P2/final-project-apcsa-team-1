@@ -1,5 +1,5 @@
 public class Attack{
-    private int attackDelay;
+    private double attackDelay;
     private int attackDamage;
     private int splashRadius;
     private int chainLength;
@@ -8,7 +8,12 @@ public class Attack{
     private int burnDamage;
     private int burnDuration;
 
-    public int getAttackDelay(){
+    public Attack(double delay, int dmg){
+        this.attackDelay = delay;
+        this.attackDamage = dmg;
+    }
+
+    public double getAttackDelay(){
         return this.attackDelay;
     }
     public int getAttackDamage(){
@@ -33,7 +38,7 @@ public class Attack{
         return this.burnDuration;
     }
 
-    public void setAttackDelay(int delay){
+    public void setAttackDelay(double delay){
         this.attackDelay = delay;
     }
     public void setAttackDamage(int dmg){
