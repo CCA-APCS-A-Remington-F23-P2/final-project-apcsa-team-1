@@ -1,5 +1,5 @@
 public class HitScanAttack extends Attack{
-    public HitScanAttack(double delay, int dmg){
+    public HitScanAttack(int delay, int dmg){
         super(delay, dmg);
     }
 
