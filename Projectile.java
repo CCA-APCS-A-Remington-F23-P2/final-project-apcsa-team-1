@@ -1,5 +1,6 @@
 public class Projectile extends Entity{
     private int damage; 
+    private int range;
 
     public Projectile(int damage, int speed, double angle, int x, int y){
         super(speed*Math.sin(angle), speed*Math.cos(angle), x, y);
@@ -14,5 +15,11 @@ public class Projectile extends Entity{
         return damage;
     }
 
+    public int getRange(){
+        return range;
+    }
+    public void setRange(int s){
+        range = s;
+    }
 
 }
