@@ -59,5 +59,9 @@ public class Enemy extends Entity{
     public int getSlowCounter(int s){
         return slowCounter;
     }
+    public boolean isDead(){
+        if(hp > 0) return false;
+        return true;
+    }
 
 }
