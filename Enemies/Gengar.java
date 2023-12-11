@@ -9,7 +9,7 @@ public class Gengar extends Enemy{
 
     @Override
     public void takeDamage(int d){
-        super(d);
+        super.takeDamage(d);
         intangibilityCounter = 10;
     }
 
