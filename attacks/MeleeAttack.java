@@ -1,0 +1,31 @@
+import java.util.List;
+public class MeleeAttack extends Attack{
+    public int radius;
+    public int sectorAngle;
+    public MeleeAttack(int delay, int damage, int radius, int sectorAngle){
+        super(delay, damage);
+        this.radius = radius;
+        this.sectorAngle = sectorAngle;
+    }
+    public int getRadius(){
+        return this.radius;
+    }
+    public int getSectorAngle(){
+        return this.sectorAngle;
+    }
+    public void setRadius(int radius){
+        this.radius = radius;
+    }
+    public void setSectorAngle(int sectorAngle){
+        this.sectorAngle = sectorAngle;
+    }
+    public void cast(Enemy target, Tower tower, List enemies){
+        int castAngle = (int) Math.atan(((double) (tower.getYPos() - target.getYPos())) / ((double) (tower.getXPos() - target.getXPos())));
+        for(Enemy e: enemies){
+            int angle = (int) Math.atan(((double) (tower.getYPos() - e.getYPos())) / ((double) (tower.getXPos() - e.getXPos())));
+            if(Math.abs(angle - castAngle) <= getSectorAngle() / 2){
+                e.takeDamage(getAttackDamage());
+            }
+        }
+    }
+}
