@@ -1,3 +1,6 @@
+package Enemies;
+import Entity;
+
 public class Enemy extends Entity{
     private int maxHp;
     private int hp;

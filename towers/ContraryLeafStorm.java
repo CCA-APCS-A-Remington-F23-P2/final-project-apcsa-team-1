@@ -1,3 +1,6 @@
+package towers;
+import Enemies.Enemy;
+
 public class ContraryLeafStorm extends HitScanAttack{
     public ContraryLeafStorm(){
         super(250, 10);

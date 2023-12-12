@@ -1,3 +1,5 @@
+package towers;
+
 public class Waterfall extends HitScanAttack{
     public Waterfall(){
         super(750, 40);

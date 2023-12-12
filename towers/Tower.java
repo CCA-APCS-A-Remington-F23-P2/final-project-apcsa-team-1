@@ -14,4 +14,12 @@ public class Tower{
         this.xPos = xPos;
         this.yPos = yPos;
     }
+    
+    public int getXPos() {
+    	return this.xPos;
+    }
+    
+    public int getYPos() {
+    	return this.yPos;
+    }
 }
