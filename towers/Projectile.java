@@ -1,3 +1,6 @@
+package towers;
+import Entity.Entity;
+
 public class Projectile extends Entity{
      
     private int range;
@@ -15,7 +18,7 @@ public class Projectile extends Entity{
     private int stunDuration;
 
     public Projectile(int speed, double angle, int x, int y, int damage, int range, int pierce){
-        super(speed*Math.sin(angle), speed*Math.cos(angle), x, y);
+        super((int) (speed*Math.sin(angle)), (int) (speed*Math.cos(angle)), x, y);
         this.attackDamage = damage;
         this.range = range;
         this.pierce = pierce;

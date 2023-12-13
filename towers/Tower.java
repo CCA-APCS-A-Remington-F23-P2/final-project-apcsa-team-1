@@ -1,3 +1,5 @@
+package towers;
+
 public class Tower{
     private int price;
     private int upgradePrice;

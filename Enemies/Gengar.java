@@ -1,3 +1,5 @@
+package Enemies;
+
 public class Gengar extends Enemy{
 
     private int intangibilityCounter; 

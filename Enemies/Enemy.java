@@ -1,5 +1,5 @@
 package Enemies;
-import Entity;
+import Entity.Entity;
 
 public class Enemy extends Entity{
     private int maxHp;
@@ -11,9 +11,9 @@ public class Enemy extends Entity{
 
 
     public Enemy(int mhp, int speed, int xp, int yp){
-        super(xp, yp, speed, 0);
+        super(xp, yp, speed);
         this.speed = speed;
-        maxHp = mhp;
+        this.maxHp = mhp;
     }
 
     public void takeDamage(int d){
@@ -36,7 +36,7 @@ public class Enemy extends Entity{
         return maxHp;
     }
 
-    public voif setHp(int s){
+    public void setHp(int s){
         hp = s;
     }
 

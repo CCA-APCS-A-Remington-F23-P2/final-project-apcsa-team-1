@@ -1,3 +1,5 @@
+package Enemies;
+
 public class Solosis extends Enemy{
 
     public Solosis(int xp, int yp){

@@ -1,3 +1,5 @@
+package Enemies;
+
 public class Reuniclus extends Enemy{
 
     public Reuniclus(int xp, int yp){
