@@ -10,7 +10,7 @@ public class Enemy extends Entity{
 
 
     public Enemy(int mhp, int speed, int xp, int yp, int money){
-        super(xp, yp, speed, 0);
+        super(xp, yp, 0 - speed, 0);
         this.speed = speed;
         maxHp = mhp;
         burnCounter = 0;
