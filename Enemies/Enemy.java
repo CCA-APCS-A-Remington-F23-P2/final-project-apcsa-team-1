@@ -5,6 +5,8 @@ public class Enemy extends Entity{
     private int burnCounter;
     private int stunCounter;
     private int slowCounter;
+    private int distTraveled;
+    private int money;
 
 
     public Enemy(int mhp, int speed, int xp, int yp){
