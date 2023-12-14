@@ -8,7 +8,7 @@ public class Game1{
     private ArrayList<Tower> selectedTowers;
     private ArrayList<Tower> placedTowers;
 
-    public Game1(){
+    public Game1(ArrayList<String> towers){
         towerSlots = new Button[12];
         towerSlots[0] = new Button(145, 215, 20, 20);
         towerSlots[1] = new Button(145, 284, 20, 20);
@@ -35,7 +35,17 @@ public class Game1{
         path[9] = new Turn(343, 490, "left");
         path[10] = new Turn(195, 490, "down");
         selectedTowers = new ArrayList<Tower>();
-        
+        for(int i=0; i<towers.length; i++){
+            if(towers.get(i) == "SNIVY") selectedTowers.add(new Snivy());
+            // if(towers.get(i) == "DREEPY") selectedTowers.add(new ());
+            // if(towers.get(i) == "PICHU") selectedTowers.add(new ());
+            // if(towers.get(i) == "CHARMANDER") selectedTowers.add(new ());
+            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
+            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
+            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
+            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
+            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
+        }
     }
 
 
