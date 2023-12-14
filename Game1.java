@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import towers.Tower;
 
 public class Game1{
     private Button[] towerSlots;
     private Enemy[][] rounds;
     private Turn[] path;
-
+    private ArrayList<Tower> selectedTowers;
+    private ArrayList<Tower> placedTowers;
 
     public Game1(){
         towerSlots = new Button[12];
@@ -32,6 +34,8 @@ public class Game1{
         path[8] = new Turn(343, 197, "up");
         path[9] = new Turn(343, 490, "left");
         path[10] = new Turn(195, 490, "down");
+        selectedTowers = new ArrayList<Tower>();
+        
     }
 
 
