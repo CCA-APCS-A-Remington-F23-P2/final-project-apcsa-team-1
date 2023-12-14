@@ -3,7 +3,7 @@ public class Gengar extends Enemy{
     private int intangibilityCounter; 
 
     public Gengar(int xp, int yp){
-           super(25, 6, xp, yp);
+           super(25, 6, xp, yp, 30);
            intangibilityCounter = 0;
     }
 
