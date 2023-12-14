@@ -5,15 +5,19 @@ public class Enemy extends Entity{
     private int maxHp;
     private int hp;
     private int speed;
-    private int burnCounter = 0;
-    private int stunCounter = 0;
-    private int slowCounter = 0;
+    private int burnCounter;
+    private int stunCounter;
+    private int slowCounter;
 
 
     public Enemy(int mhp, int speed, int xp, int yp){
         super(xp, yp, speed);
         this.speed = speed;
         this.maxHp = mhp;
+        maxHp = mhp;
+        burnCounter = 0;
+        stunCounter = 0;
+        slowCounter = 0;
     }
 
     public void takeDamage(int d){
