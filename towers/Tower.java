@@ -1,3 +1,5 @@
+package towers;
+
 public class Tower{
     private int price;
     private int upgradePrice;
@@ -13,5 +15,13 @@ public class Tower{
         this.nextUpgrade = nextUpgrade;
         this.xPos = xPos;
         this.yPos = yPos;
+    }
+    
+    public int getXPos() {
+    	return this.xPos;
+    }
+    
+    public int getYPos() {
+    	return this.yPos;
     }
 }

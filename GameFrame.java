@@ -3,7 +3,7 @@ import javax.swing.JPanel;
 public class GameFrame extends JFrame{
   
   private static final int WIDTH = 1000;
-  private static final int HEIGHT = 400;
+  private static final int HEIGHT = 600;
   
   public GameFrame(){
     super("Poke-Defense");

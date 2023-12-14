@@ -1,3 +1,5 @@
+package Enemies;
+
 public class Snorlax extends Enemy{
 
     public Snorlax(int xp, int yp){

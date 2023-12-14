@@ -1,3 +1,5 @@
+package Enemies;
+
 public class Geodude extends Enemy{
 
     public Geodude(int xp, int yp){

@@ -1,3 +1,5 @@
+package Enemies;
+
 public class DeoxysDefense extends Boss{
 
     public DeoxysDefense (int xp, int yp){

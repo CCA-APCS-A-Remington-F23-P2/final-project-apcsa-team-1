@@ -1,3 +1,5 @@
+package Enemies;
+
 public class Dialga extends Boss{
 
     public Dialga (int xp, int yp){

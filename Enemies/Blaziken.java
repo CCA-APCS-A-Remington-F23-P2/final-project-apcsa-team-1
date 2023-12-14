@@ -1,7 +1,9 @@
+package Enemies;
+
 public class Blaziken extends Enemy{
 
-    private int SpeedBoostCounter;
-    private double SpeedBoostLevel;
+    private int speedBoostCounter;
+    private double speedBoostLevel;
 
     public Blaziken(int xp, int yp){
         super(35, 6, xp, yp, 50);
@@ -17,7 +19,7 @@ public class Blaziken extends Enemy{
             speedBoostCounter = 300;
             if(speedBoostLevel < 4){
                 speedBoostLevel += 0.5;
-                setSpeed(speedBoostLevel * getSpeed());
+                setSpeed((int) (speedBoostLevel * getSpeed()));
             }
         }
     }
@@ -28,7 +30,7 @@ public class Blaziken extends Enemy{
     public void setSpeedBoostCounter(int s){
         speedBoostCounter = s;
     }
-    public int getSpeedBoostLevel(){
+    public double getSpeedBoostLevel(){
         return speedBoostLevel;
     }
     public void setSpeedBoostLevel(int s){

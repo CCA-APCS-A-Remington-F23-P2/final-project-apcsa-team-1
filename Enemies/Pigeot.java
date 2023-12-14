@@ -1,3 +1,5 @@
+package Enemies;
+
 public class Pigeot extends Enemy{
 
     public Pigeot(int xp, int yp){

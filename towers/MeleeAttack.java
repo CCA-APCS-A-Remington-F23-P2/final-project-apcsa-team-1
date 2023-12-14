@@ -1,4 +1,7 @@
+package towers;
 import java.util.List;
+import Enemies.Enemy;
+
 public class MeleeAttack extends Attack{
     public int radius;
     public int sectorAngle;
@@ -21,7 +24,8 @@ public class MeleeAttack extends Attack{
     }
     public void cast(Enemy target, Tower tower, List enemies){
         int castAngle = (int) Math.atan(((double) (tower.getYPos() - target.getYPos())) / ((double) (tower.getXPos() - target.getXPos())));
-        for(Enemy e: enemies){
+        for(Object en: enemies){
+        	Enemy e = (Enemy) en;
             int angle = (int) Math.atan(((double) (tower.getYPos() - e.getYPos())) / ((double) (tower.getXPos() - e.getXPos())));
             if(Math.abs(angle - castAngle) <= getSectorAngle() / 2){
                 e.takeDamage(getAttackDamage());

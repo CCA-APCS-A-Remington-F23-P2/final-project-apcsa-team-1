@@ -1,3 +1,5 @@
+package Enemies;
+
 public class Rattata extends Enemy{
 
     public Rattata(int xp, int yp){

@@ -1,3 +1,7 @@
+// Happy birthday Ozan!!!!
+
+package towers;
+
 public class Attack{
     private int attackDelay;
     private int attackDamage;
