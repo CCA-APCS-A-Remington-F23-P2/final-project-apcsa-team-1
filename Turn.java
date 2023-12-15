@@ -2,7 +2,7 @@ public class Turn{
     private int x;
     private int y; 
     private String direction;
-    public Turn(int x, int y, int d){
+    public Turn(int x, int y, String d){
         this.x = x;
         this.y = y;
         direction = d;
@@ -20,7 +20,7 @@ public class Turn{
     public void setY(int input){
         y = input;
     }
-    public int getDirection(){
+    public String getDirection(){
         return direction;
     }
     public void setDirection(String input){
