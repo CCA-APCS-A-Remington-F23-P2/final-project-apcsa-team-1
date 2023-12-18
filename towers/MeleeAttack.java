@@ -22,11 +22,11 @@ public class MeleeAttack extends Attack{
     public void setSectorAngle(int sectorAngle){
         this.sectorAngle = sectorAngle;
     }
-    public void cast(Enemy target, Tower tower, List enemies){
-        int castAngle = (int) Math.atan(((double) (tower.getYPos() - target.getYPos())) / ((double) (tower.getXPos() - target.getXPos())));
+    public void cast(Enemy target, Tower tower, List<Enemy> enemies){
+        int castAngle = (int) Math.atan(((double) (tower.getY() - target.getYPos())) / ((double) (tower.getX() - target.getXPos())));
         for(Object en: enemies){
         	Enemy e = (Enemy) en;
-            int angle = (int) Math.atan(((double) (tower.getYPos() - e.getYPos())) / ((double) (tower.getXPos() - e.getXPos())));
+            int angle = (int) Math.atan(((double) (tower.getY() - e.getYPos())) / ((double) (tower.getX() - e.getXPos())));
             if(Math.abs(angle - castAngle) <= getSectorAngle() / 2){
                 e.takeDamage(getAttackDamage());
             }

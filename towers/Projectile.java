@@ -1,5 +1,7 @@
 package towers;
 import Entity.Entity;
+import Enemies.Enemy;
+import java.util.ArrayList;
 
 public class Projectile extends Entity{
      
@@ -16,12 +18,25 @@ public class Projectile extends Entity{
     private int burnDamage;
     private int burnDuration;
     private int stunDuration;
-
+    private ArrayList<Enemy> enemiesHit;
+    
+    private int direction;
+    /**
+     * 225 270 315
+     *  180 T 0 
+     *  135 90 45
+     */
+    
+    
+    // When first starting the game, create a set of reference projectiles that are not drawn
+    // and instead float endlessly into space with all the correct properties. It's really
+    // scuffed but it'll work
     public Projectile(int speed, double angle, int x, int y, int damage, int range, int pierce){
         super((int) (speed*Math.sin(angle)), (int) (speed*Math.cos(angle)), x, y);
         this.attackDamage = damage;
         this.range = range;
         this.pierce = pierce;
+        this.enemiesHit = new ArrayList<Enemy>();
     }
 
     public int getAttackDelay(){
@@ -110,5 +125,6 @@ public class Projectile extends Entity{
     public void setPierce(int p){
         pierce = p;
     }
+    
 
 }

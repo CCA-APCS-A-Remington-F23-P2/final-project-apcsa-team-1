@@ -8,9 +8,9 @@ public class Waterfall extends HitScanAttack{
         setSplashRadius(50);
     }
     
-    public void cast(Tower t, List enemyList){
-        int xPos = t.getXPos();
-        int yPos = t.getYPos();
+    public void cast(Tower t, List<Enemy> enemyList){
+        int xPos = t.getX();
+        int yPos = t.getY();
         for(Object en: enemyList){
         	Enemy e = (Enemy) en;
             int eX = e.getXPos();

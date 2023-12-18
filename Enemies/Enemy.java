@@ -12,14 +12,15 @@ public class Enemy extends Entity{
     private int money;
 
 
-    public Enemy(int mhp, int speed, int xp, int yp){
-        super(xp, yp, speed);
+    public Enemy(int mhp, int speed, int xp, int yp, int money){
+        super(xp, yp, 0 - speed, 0);
         this.speed = speed;
         this.maxHp = mhp;
         maxHp = mhp;
         burnCounter = 0;
         stunCounter = 0;
         slowCounter = 0;
+        this.money = money;
     }
 
     public void takeDamage(int d){
@@ -71,6 +72,18 @@ public class Enemy extends Entity{
     public boolean isDead(){
         if(hp > 0) return false;
         return true;
+    }
+    public int getDistTraveled(){
+        return distTraveled;
+    }
+    public void setDistTraveled(int s){
+        distTraveled = s;
+    }
+    public int getMoney(){
+        return money;
+    }
+    public void setMoney(int s){
+        money = s;
     }
 
 }

@@ -6,7 +6,7 @@ public class Blaziken extends Enemy{
     private double speedBoostLevel;
 
     public Blaziken(int xp, int yp){
-        super(35, 6, xp, yp);
+        super(35, 6, xp, yp, 50);
         speedBoostCounter = 300;
         speedBoostLevel = 1;
     }

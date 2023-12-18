@@ -1,4 +1,6 @@
 package towers;
+import java.util.List;
+
 import Enemies.Enemy;
 
 public class HitScanAttack extends Attack{
@@ -6,7 +8,7 @@ public class HitScanAttack extends Attack{
         super(delay, dmg);
     }
 
-    public void cast(Enemy target){
+    public void cast(Enemy target, Tower tower, List<Enemy> enemies){
         target.takeDamage(getAttackDamage());
     }
 }
