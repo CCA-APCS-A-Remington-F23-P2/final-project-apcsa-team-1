@@ -39,12 +39,15 @@ public class Button{
     this(x,y,width,height);
     this.img = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
   }
-  
+
  public boolean clicked(MouseEvent e){
     return e.getX() > x && e.getX() < x+width && e.getY() > y && e.getY() < y+height;
   }
   public void draw(Graphics g){
     if(img == null){
+      if(c == null){
+        return;
+      }
     g.setColor(c);
     g.fillRect(x, y, width, height);
     g.setColor(Color.black);
@@ -59,4 +62,11 @@ public class Button{
   public void setColor(Color c){
     this.c = c;
   } 
+  public void setImg(Image img){
+    if(img == null){
+      this.img = null;
+      return;
+    }
+    this.img = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+  }
 }

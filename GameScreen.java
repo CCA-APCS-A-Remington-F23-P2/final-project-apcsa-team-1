@@ -36,9 +36,29 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
   Image select;
   Button startGame;
   Button back;
+  Button snivy;
+  Button pichu;
+  Button charmander;
+  Button honedge;
+  Button magicarp;
+  Button dreepy;
+  Button sobble;
+  Button cleffa;
+  Image snivyImg;
+  Image pichuImg;
+  Image charmanderImg;
+  Image honedgeImg;
+  Image magicarpImg;
+  Image dreepyImg;
+  Image sobbleImg;
+  Image cleffaImg;
+  ArrayList<String> selection;
+  ArrayList<Image> selectionImg;
+
+  Button[] selectionButtons;
   // 2 is game screen
   public GameScreen(){
-
+    selection = new ArrayList<String>();
     //CHECK IF THE GAME INFO FILE IS EMPTY OR NOT!
 
     gameToLoad = false;
@@ -50,6 +70,15 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
       map1Img = ImageIO.read(getClass().getResource("map 1.png"));
         map2Img = ImageIO.read(getClass().getResource("map 2.png"));
       select = ImageIO.read(getClass().getResource("Select.png"));
+
+      snivyImg = ImageIO.read(getClass().getResource("Snivy.png"));
+        pichuImg = ImageIO.read(getClass().getResource("Pichu.png"));
+      charmanderImg = ImageIO.read(getClass().getResource("Charmander.png"));
+      honedgeImg = ImageIO.read(getClass().getResource("Honedge.png"));
+      magicarpImg = ImageIO.read(getClass().getResource("Magicarp.png"));
+      dreepyImg = ImageIO.read(getClass().getResource("Dreepy.png"));
+      sobbleImg = ImageIO.read(getClass().getResource("Sobble.png"));
+      cleffaImg = ImageIO.read(getClass().getResource("Cleffa.png"));
     }
     catch(Exception e)
     {
@@ -65,10 +94,32 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
       map1 = new Button(100,350,300,180,map1Img);
       map2 = new Button(600,350,300,180,map2Img);
 
-    startGame = new Button(375,200,200,80,"Start",Color.YELLOW);
+    startGame = new Button(375,200,200,80,"Start",Color.GRAY);
     back = new Button(375,400,200,80,"Back",Color.RED);
+
+
+
+    snivy = new Button(635,175,100,100,snivyImg);
+    pichu = new Button(750,175,100,100,pichuImg);
+    charmander = new Button(865,175,100,100,charmanderImg);
+
+    honedge = new Button(635,290,100,100,honedgeImg);
+    magicarp = new Button(750,290,100,100,magicarpImg);
+    dreepy = new Button(865,290,100,100,dreepyImg);
+
+    sobble = new Button(635,400,100,100,sobbleImg);
+    cleffa = new Button(750,400,100,100,cleffaImg);
+
+    selectionImg = new ArrayList<Image>();
+    selectionButtons = new Button[6];
+    for(int i = 0; i < 6;i++){
+      selectionButtons[i] = new Button(35 + 145*(i%2),140*(1+i/2),125,125);
+    }
+   // sel1 = new Button(35,140,125,125);
+
+    // Can add one more
   }
-  
+
   public void actionPerformed(ActionEvent evt) {
     repaint();
   }
@@ -80,7 +131,7 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
     } else if (state == 2){
      drawGame(g);
     }
-    
+
   }
 
   public void drawMenu (Graphics g){
@@ -115,18 +166,31 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
     map2.draw(g);
 
     }
-  
+
   public void drawSelection (Graphics g){
     g.drawImage(select,0,0,null);
 
     startGame.draw(g);
     back.draw(g);
+    snivy.draw(g);
+    pichu.draw(g);
+    charmander.draw(g);
+    honedge.draw(g);
+    magicarp.draw(g);
+    dreepy.draw(g);
+    sobble.draw(g);
+    cleffa.draw(g);
+
+    for(Button b: selectionButtons){
+      b.draw(g);
+    }
+
   }
   public void drawGame (Graphics g){
     g.setColor(Color.ORANGE);
     g.fillRect(0,0,getWidth(),getHeight());
   }
-  
+
   public void mouseClicked(MouseEvent e){
     if(state==0){
       if(newGameButton.clicked(e) && selectedMap !=0){
@@ -139,24 +203,114 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
         System.out.println("Yay loading game..");
     }
     } else if(state == 1){
-      if(startGame.clicked(e)){
+      if(startGame.clicked(e) && selection.size() == 6){
         state++;
+        return;
       } else if (back.clicked(e)){
         state--;
+        selection = new ArrayList<String>();
+        selectionImg = new ArrayList<Image>();
+        startGame.setColor(Color.GRAY);
+        for(int i = 0; i < selectionButtons.length;i++){
+          selectionButtons[i].setImg(null);
+        } 
+        return;
+      }  
+      if(snivy.clicked(e)){
+        if(!selection.remove("Snivy")){
+        selection.add("Snivy");
+        selectionImg.add(snivyImg);
+        } else {
+          selectionImg.remove(snivyImg);
+        }
+      } else if(pichu.clicked(e)){
+        if(!selection.remove("Pichu")){
+        selection.add("Pichu");
+        selectionImg.add(pichuImg);
+        } else {
+          selectionImg.remove(pichuImg);
+        }
+    } else if(charmander.clicked(e)){
+        if(!selection.remove("Charmander")){
+        selection.add("Charmander");
+          selectionImg.add(charmanderImg);
+
+        } else {
+          selectionImg.remove(charmanderImg);
+        }
+    } else if(honedge.clicked(e)){
+        if(!selection.remove("Honedge")){
+        selection.add("Honedge");
+          selectionImg.add(honedgeImg);
+
+        }else {
+          selectionImg.remove(honedgeImg);
+        }
+      } else if(magicarp.clicked(e)){
+        if(!selection.remove("Magicarp")){
+        selection.add("Magicarp");
+          selectionImg.add(magicarpImg);
+
+        }else {
+          selectionImg.remove(magicarpImg);
+        }
+      } else if(dreepy.clicked(e)){
+        if(!selection.remove("Dreepy")){
+        selection.add("Dreepy");
+          selectionImg.add(dreepyImg);
+
+        } else {
+          selectionImg.remove(dreepyImg);
+        }
+      } else if(sobble.clicked(e)){
+        if(!selection.remove("Sobble")){
+        selection.add("Sobble");
+          selectionImg.add(sobbleImg);
+
+        } else {
+          selectionImg.remove(sobbleImg);
+        }
+      } else if(cleffa.clicked(e)){
+        if(!selection.remove("Cleffa")){
+        selection.add("Cleffa");
+        selectionImg.add(cleffaImg);
+
+        } else {
+          selectionImg.remove(cleffaImg);
+        }
+      } else {
+        return;
       }
+      if(selection.size() == 7){
+        selection.remove(6);
+        selectionImg.remove(6);
+      } // WORKING ON HERE
+      if(selection.size()==6){
+        startGame.setColor(Color.YELLOW);
+      } else {
+        startGame.setColor(Color.GRAY);
+      }
+      for(int i = 0; i < selectionButtons.length;i++){
+        selectionButtons[i].setImg(i < selectionImg.size() ? selectionImg.get(i) : null);
+      } 
+
+      System.out.println(selection);
     }
-    }
- public void	mouseEntered(MouseEvent e){
-    
   }
+
+
+
+ public void	mouseEntered(MouseEvent e){
+
+  } 
   public void	mouseExited(MouseEvent e){
-    
+
   }
   public void	mousePressed(MouseEvent e){
-    
+    System.out.println(e.getX() + " " + e.getY());
   }
   public void mouseReleased(MouseEvent e){
-    
+
   }
 }
 
