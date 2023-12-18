@@ -27,6 +27,8 @@ public class Projectile extends Entity{
      *  135 90 45
      */
     
+    private int travel;
+    
     
     // When first starting the game, create a set of reference projectiles that are not drawn
     // and instead float endlessly into space with all the correct properties. It's really
@@ -37,6 +39,12 @@ public class Projectile extends Entity{
         this.range = range;
         this.pierce = pierce;
         this.enemiesHit = new ArrayList<Enemy>();
+        this.travel = 0;
+    }
+    
+    // Deep copy constructor
+    public Projectile(int speed, double angle, int x, int y, Projectile that) {
+    	this(speed, angle, x, y, that.getAttackDamage(), that.getRange(), that.getPierce());
     }
 
     public int getAttackDelay(){
@@ -124,6 +132,20 @@ public class Projectile extends Entity{
 
     public void setPierce(int p){
         pierce = p;
+    }
+    
+    public boolean moveAndCheck() {
+    	/**
+    	 * Returns true if move was successful
+    	 * Returns false if maximum lifespan or pierce reached
+    	 */
+    	this.move();
+    	travel += (int) Math.sqrt(getXSpeed()^2 + getYSpeed()^2);
+    	if(travel >= getRange() || enemiesHit.size() >= getPierce()) {
+    		return false;
+    	}else {
+    		return true;
+    	}
     }
     
 
