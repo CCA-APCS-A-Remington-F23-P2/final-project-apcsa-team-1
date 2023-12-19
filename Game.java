@@ -1,71 +1,144 @@
 import Enemies.Enemy;
 import java.util.ArrayList;
 import towers.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import javax.swing.Timer;
+import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
+import java.io.File;
+import java.net.URL;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
-public class Game {
-  private Button[] towerSlots;
-  private Enemy[][] rounds;
-  private Turn[] path;
-  private ArrayList<Tower> selectedTowers;
-  private ArrayList<Tower> placedTowers;
-  // private void addCorrespondingTower(String s){
-  //   if(s.equals("Snivy")){
-  //     selectedTowers.add(new Snivy(0,0));
-  //   } else if(s.equals("Dreepy")){
-  //       selectedTowers.add(new Dreepy(0,0));
-  //   } else if(s.equals("Pichu")){
-  //         selectedTowers.add(new Pichu(0,0));
-  //   } else if(s.equals("Charmander")){
-  //        selectedTowers.add(new Charmander(0,0));
-  //   } else if(s.equals("Sobble")){
-  //         selectedTowers.add(new Sobble(0,0));
-  //     } else if(s.equals("Magicarp")){
-  //           selectedTowers.add(new Magikarp(0,0));
-  //     } else if(s.equals("Cleffa")){
-  //          selectedTowers.add(new Cleffa(0,0));
-  //     } else if(s.equals("Honedge")){
-  //          selectedTowers.add(new Honedge(0,0));
-  //     }
-  //   }
+public abstract class Game {
+    private int money;
+    private int score;
 
-  // public Game(ArrayList<String> towers) {
-  //   towerSlots = new Button[12];
-  //   towerSlots[0] = new Button(145, 215, 20, 20);
-  //   towerSlots[1] = new Button(145, 284, 20, 20);
-  //   towerSlots[2] = new Button(145, 350, 20, 20);
-  //   towerSlots[3] = new Button(245, 440, 20, 20);
-  //   towerSlots[4] = new Button(380, 487, 20, 20);
-  //   towerSlots[5] = new Button(380, 387, 20, 20);
-  //   towerSlots[6] = new Button(380, 270, 20, 20);
-  //   towerSlots[7] = new Button(457, 388, 20, 20);
-  //   towerSlots[8] = new Button(568, 115, 20, 20);
-  //   towerSlots[9] = new Button(638, 265, 20, 20);
-  //   towerSlots[10] = new Button(829, 282, 20, 20);
-  //   towerSlots[11] = new Button(829, 451, 20, 20);
-  //   path = new Turn[11];
-  //   path[0] = new Turn(785, 228, "up");
-  //   path[1] = new Turn(780, 450, "left");
-  //   path[2] = new Turn(636, 447, "down");
-  //   path[3] = new Turn(630, 340, "left");
-  //   path[4] = new Turn(470, 333, "down");
-  //   path[5] = new Turn(470, 75, "left");
-  //   path[6] = new Turn(378, 75, "up");
-  //   path[7] = new Turn(378, 199, "left");
-  //   path[8] = new Turn(343, 197, "up");
-  //   path[9] = new Turn(343, 490, "left");
-  //   path[10] = new Turn(195, 490, "down");
-  //   selectedTowers = new ArrayList<Tower>();
-  //   // for(int i=0; i<towers.length; i++){
-  //   // // if(towers.get(i) == "SNIVY") selectedTowers.add(new Snivy());
-  //   // // if(towers.get(i) == "DREEPY") selectedTowers.add(new Dreepy());
-  //   // // if(towers.get(i) == "PICHU") selectedTowers.add(new Pichu());
-  //   // // if(towers.get(i) == "CHARMANDER") selectedTowers.add(new Charmander());
-  //   // // if(towers.get(i) == "SOBBLE") selectedTowers.add(new Sobble());
-  //   // // if(towers.get(i) == "MAGIKARP") selectedTowers.add(new Magikarp());
-  //   // // if(towers.get(i) == "CLEFFA") selectedTowers.add(new Cleffa());
-  //   // // if(towers.get(i) == "HONEDGE") selectedTowers.add(new Honedge());
-  //   // // if(towers.get(i) == "") selectedTowers.add(new Snivy());
-  //   // }
-  // }
+    private Enemy[][] rounds;
+    private int waveCount;
+
+    private Button[] towerSlots;
+    private Tower[] towers;
+
+    private Turn[] path;
+    private ArrayList < Tower > selectedTowers;
+    private Image map;
+    private Tower selected;
+
+  private int startX;
+  private int startY;
+
+
+
+
+  public void setStartX(int a){
+    startX = a;
+  }
+  public void setStartY(int a){
+    startY = a;
+  }
+    public int getMoney() {
+        return money;
+    }
+    public int getScore() {
+        return score;
+    }
+    public void setMoney(int m) {
+        money = m;
+    }
+    public void setScore(int s) {
+        score = s;
+    }
+
+    public void setTowerSlots(Button[] towerSlots) {
+        this.towerSlots = towerSlots;
+        towers = new Tower[towerSlots.length];
+    }
+
+    public void setPath(Turn[] path) {
+        this.path = path;
+    }
+
+    public void setImg(Image map) {
+        this.map = map;
+    }
+    public Game(ArrayList < String > towerSelection) {
+      selectedTowers = new ArrayList<Tower>();
+        for (String s: towerSelection) {
+            addCorrespondingTower(s);
+        }
+        money = 100;
+        score = 0;
+
+    }
+
+  public void setTowerSelects(int x, int y){
+    return;
+  }
+
+
+
+
+    private void addCorrespondingTower(String s) {
+        if (s.equals("Snivy")) {
+            selectedTowers.add(new Snivy(0, 0));
+        } else if (s.equals("Dreepy")) {
+            selectedTowers.add(new Dreepy(0, 0));
+        } else if (s.equals("Pichu")) {
+            selectedTowers.add(new Pichu(0, 0));
+        } else if (s.equals("Charmander")) {
+            selectedTowers.add(new Charmander(0, 0));
+        } else if (s.equals("Sobble")) {
+            selectedTowers.add(new Sobble(0, 0));
+        } else if (s.equals("Magicarp")) {
+            selectedTowers.add(new Magikarp(0, 0));
+        } else if (s.equals("Cleffa")) {
+            selectedTowers.add(new Cleffa(0, 0));
+        } else if (s.equals("Honedge")) {
+            selectedTowers.add(new Honedge(0, 0));
+        }
+    }
+
+
+    public void draw(Graphics g) {
+        g.drawImage(map, 0, 0, null);
+    }
+
+    public void dealWithClick(MouseEvent e) {
+        System.out.println(e.getX() + ", " + e.getY());
+        for (int i = 0; i < towerSlots.length; i++) {
+            if (towerSlots[i].clicked(e) && buyTower(towers[i], selected)) {
+                System.out.println("placed a tower!");
+            }
+        }
+    }
+
+
+
+
+
+
+    public boolean buyTower(Tower t, Tower toBeAdded) {
+        if (t != null || toBeAdded == null) {
+            return false;
+        }
+        if (money >= toBeAdded.PRICE) {
+            money -= toBeAdded.PRICE;
+            return true;
+        }
+        return false;
+    }
 
 }

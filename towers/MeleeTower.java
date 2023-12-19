@@ -2,14 +2,20 @@ package towers;
 
 import java.util.ArrayList;
 import Enemies.Enemy;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.File;
 
 public class MeleeTower extends Tower {
 	private MeleeAttack attack;
 
-	public MeleeTower(MeleeAttack attack, int price, int upgradePrice, Tower nextUpgrade, int range, int xPos,
-			int yPos) {
-		super(price, upgradePrice, nextUpgrade, range, xPos, yPos);
-		this.setAttack(attack);
+  private Image self;
+
+	public MeleeTower(MeleeAttack attack, int[] upgradePrices, int[] ranges, int xPos,
+                     int yPos) {
+    super(upgradePrices, ranges, xPos, yPos);
+    this.setAttack(attack);
 	}
 
 	public void cast(ArrayList<Tower> towers, ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles) {
@@ -42,4 +48,11 @@ public class MeleeTower extends Tower {
 	public void setAttack(MeleeAttack attack) {
 		this.attack = attack;
 	}
+
+  public void setImage(Image self){
+    this.self = self;
+  }
+  public void draw(Graphics g){
+    g.drawImage(self,getX(),getY(),null);
+  }
 }

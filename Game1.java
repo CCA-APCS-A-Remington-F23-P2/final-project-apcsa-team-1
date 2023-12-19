@@ -1,53 +1,66 @@
+import Enemies.Enemy;
 import java.util.ArrayList;
 import towers.*;
-import Enemies.Enemy;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import javax.swing.Timer;
+import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
+import java.io.File;
+import java.net.URL;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
-public class Game1{
-    private Button[] towerSlots;
-    private Enemy[][] rounds;
-    private Turn[] path;
-    private ArrayList<Tower> selectedTowers;
-    private ArrayList<Tower> placedTowers;
+public class Game1 extends Game {
 
-    public Game1(ArrayList<String> towers){
-        towerSlots = new Button[12];
-        towerSlots[0] = new Button(145, 215, 20, 20);
-        towerSlots[1] = new Button(145, 284, 20, 20);
-        towerSlots[2] = new Button(145, 350, 20, 20);
-        towerSlots[3] = new Button(245, 440, 20, 20);
-        towerSlots[4] = new Button(380, 487, 20, 20);
-        towerSlots[5] = new Button(380, 387, 20, 20);
-        towerSlots[6] = new Button(380, 270, 20, 20);
-        towerSlots[7] = new Button(457, 388, 20, 20);
-        towerSlots[8] = new Button(568, 115, 20, 20);
-        towerSlots[9] = new Button(638, 265, 20, 20);
-        towerSlots[10] = new Button(829, 282, 20, 20);
-        towerSlots[11] = new Button(829, 451, 20, 20);
-        path = new Turn[11];
-        path[0] = new Turn(785, 228, "up");
-        path[1] = new Turn(780, 450, "left");
-        path[2] = new Turn(636, 447, "down");
-        path[3] = new Turn(630, 340, "left");
-        path[4] = new Turn(470, 333, "down");
-        path[5] = new Turn(470, 75, "left");
-        path[6] = new Turn(378, 75, "up");
-        path[7] = new Turn(378, 199, "left");
-        path[8] = new Turn(343, 197, "up");
-        path[9] = new Turn(343, 490, "left");
-        path[10] = new Turn(195, 490, "down");
-        selectedTowers = new ArrayList<Tower>();
-        for(int i=0; i < towers.size(); i++){
-            if(towers.get(i) == "SNIVY") selectedTowers.add(new Snivy(0, 0));
-            // if(towers.get(i) == "DREEPY") selectedTowers.add(new ());
-            // if(towers.get(i) == "PICHU") selectedTowers.add(new ());
-            // if(towers.get(i) == "CHARMANDER") selectedTowers.add(new ());
-            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
-            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
-            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
-            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
-            // if(towers.get(i) == "") selectedTowers.add(new Snivy());
-        }
+  public Game1(ArrayList<String> towers){
+        super(towers);
+      try {
+        setImg(ImageIO.read(new File("images/map 1.png")));
+      } catch (IOException e) {
+
+      }
+        
+        Button[] towerSlots = new Button[13];
+        towerSlots[0] = new Button(95, 104, 20, 20);
+        towerSlots[1] = new Button(147, 104, 20, 20);
+        towerSlots[2] = new Button(95, 161, 20, 20);
+        towerSlots[3] = new Button(810, 104, 20, 20);
+        towerSlots[4] = new Button(868, 104, 20, 20);
+        towerSlots[5] = new Button(868, 161, 20, 20);
+        towerSlots[6] = new Button(492, 294, 20, 20);
+        towerSlots[7] = new Button(168, 279, 20, 20);
+        towerSlots[8] = new Button(224, 279, 20, 20);
+        towerSlots[9] = new Button(284, 279, 20, 20);
+        towerSlots[10] = new Button(870, 479, 20, 20);
+        towerSlots[11] = new Button(870, 425, 20, 20);
+        towerSlots[12] = new Button(811, 479, 20, 20);
+       setTowerSlots(towerSlots);
+        Turn[] path = new Turn[10]; 
+        path[0] = new Turn(920, 227, "up");
+        path[1] = new Turn(920, 63, "left");
+        path[2] = new Turn(54, 64, "down");
+        path[3] = new Turn(54, 300, "right");
+        path[4] = new Turn(396, 300, "up");
+        path[5] = new Turn(396, 204, "right");
+        path[6] = new Turn(588, 204, "down");
+        path[7] = new Turn(588, 300, "left");
+        path[8] = new Turn(915, 300, "up");
+        path[9] = new Turn(915, 540, "left");
+      setPath(path);
+    setStartX(962);
+    setStartY(232);
     }
-
 
 }

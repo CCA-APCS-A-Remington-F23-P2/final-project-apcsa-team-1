@@ -1,24 +1,11 @@
-public class Turn{
-    private int x;
-    private int y; 
+import Enemies.Enemy;
+import Entity.Entity;
+
+public class Turn extends Entity{
     private String direction;
     public Turn(int x, int y, String d){
-        this.x = x;
-        this.y = y;
+        super(0, x, y);
         direction = d;
-    }
-
-    public int getX() {
-        return x;
-    }
-    public void setX(int input) {
-        x = input;
-    }
-    public int getY(){
-        return y;
-    }
-    public void setY(int input){
-        y = input;
     }
     public String getDirection(){
         return direction;
@@ -26,6 +13,5 @@ public class Turn{
     public void setDirection(String input){
         direction = input;
     }
-
 
 }

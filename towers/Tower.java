@@ -4,23 +4,21 @@ import java.util.ArrayList;
 import Enemies.Enemy;
 
 public class Tower {
-	private int price;
-	private int upgradePrice;
-	private Tower nextUpgrade;
+  private int tier;
+	public int PRICE;
+	private int[] upgradePrices;
 	private int xPos;
 	private int yPos;
-	private int id;
-	private int range;
+	private int[] range;
 
 	private int attackCounter;
 
-	public Tower(int price, int upgradePrice, Tower nextUpgrade, int range, int xPos, int yPos) {
-		this.price = price;
-		this.upgradePrice = upgradePrice;
-		this.nextUpgrade = nextUpgrade;
-		this.range = range;
+	public Tower(int[] upgradePrices, int[] ranges, int xPos, int yPos) {
+		this.upgradePrices = upgradePrices;
+		this.range = ranges;
 		this.xPos = xPos;
 		this.yPos = yPos;
+    tier = 0;
 	}
 
 	public int getX() {
@@ -31,45 +29,27 @@ public class Tower {
 		return this.yPos;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int newPrice) {
-		this.price = newPrice;
-	}
 
 	public int getUpgradePrice() {
-		return upgradePrice;
+		if(tier != 2){
+      return upgradePrices[tier];
+    }
+    return -1;
+	}
+  public void upgrade(){
+    tier++;
+  }
+
+	public int[] getUpgradePrices() {
+		return upgradePrices;
 	}
 
-	public void setUpgradePrice(int newUpgradePrice) {
-		this.upgradePrice = newUpgradePrice;
-	}
 
-	public Tower getNextUpgrade() {
-		return nextUpgrade;
-	}
-
-	public void setNextUpgrade(Tower newNextUpgrade) {
-		this.nextUpgrade = newNextUpgrade;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getRange() {
-		return range;
+		return range[tier];
 	}
 
-	public void setRange(int range) {
-		this.range = range;
-	}
 
 	public int getAttackCounter() {
 		return attackCounter;
@@ -79,8 +59,16 @@ public class Tower {
 		this.attackCounter = attackCounter;
 	}
 
+  public int getTier(){
+    return tier;
+  }
+
+  public void setTier(int tier){
+    this.tier = tier;
+  }
+
 	public String getInfo() {
-		return "" + id + " " + xPos + " " + yPos;
+		return "" + getClass() + " " + xPos + " " + yPos;
 	}
 
 }

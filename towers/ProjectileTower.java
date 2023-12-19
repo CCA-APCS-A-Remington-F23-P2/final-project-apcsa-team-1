@@ -2,13 +2,16 @@ package towers;
 
 import java.util.ArrayList;
 import Enemies.Enemy;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.File;
 
 public class ProjectileTower extends Tower {
 	private Projectile attack;
-
-	public ProjectileTower(Projectile attack, int price, int upgradePrice, Tower nextUpgrade, int range, int xPos,
-			int yPos) {
-		super(price, upgradePrice, nextUpgrade, range, xPos, yPos);
+  private Image self;
+	public ProjectileTower(Projectile attack, int[] upgradePrices, int[] ranges, int xPos, int yPos) {
+		super(upgradePrices, ranges, xPos, yPos);
 		this.setAttack(attack);
 	}
 
@@ -46,4 +49,20 @@ public class ProjectileTower extends Tower {
 	public void setAttack(Projectile attack) {
 		this.attack = attack;
 	}
+  
+  // synonyms
+  public Projectile getProjectile(){
+    return getAttack();
+  }
+
+  public void setProjectile(Projectile attack){
+    setAttack(attack);
+  }
+  
+  public void setImage(Image self){
+    this.self = self;
+  }
+  public void draw(Graphics g){
+    g.drawImage(self,getX(),getY(),null);
+  }
 }
