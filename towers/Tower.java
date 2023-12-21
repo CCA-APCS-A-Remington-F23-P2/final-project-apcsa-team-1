@@ -3,6 +3,7 @@ package towers;
 import java.util.ArrayList;
 import Enemies.Enemy;
 import java.awt.Image;
+import java.io.Serializable;
 import java.awt.Graphics;
 
 public class Tower implements Serializable{
@@ -96,4 +97,6 @@ public class Tower implements Serializable{
   }
     return false;
 }
+
+public int getPrice() {return 0;};
 }

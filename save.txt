@@ -1,0 +1,19 @@
+2 98330 0 1 
+class towers.Snivy 0 0 0
+class towers.Pichu 0 0 0
+class towers.Charmander 0 0 0
+class towers.Dreepy 0 0 0
+class towers.Magikarp 0 0 0
+class towers.Honedge 0 0 0
+null
+null
+null
+null
+null
+null
+class towers.Charmander 0 370 266
+null
+class towers.Magikarp 3 558 105
+null
+class towers.Snivy 0 824 270
+null

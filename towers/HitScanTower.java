@@ -18,14 +18,17 @@ public class HitScanTower extends Tower {
   }
 
   public void cast(ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles) {
-    int targetIndex = -1;
+	System.out.println(getAttackCounter());
+	int targetIndex = -1;
     int furthestProgress = -1;
     int i = 0;
     if (getAttackCounter() <= 0) {
       for (Enemy e : enemies) {
         int sqDistance = (int) Math.pow((getX() - e.getX()),2) + (int) Math.pow((getY() - e.getY()), 2);
         int sqRange = (int) Math.pow(getRange(),2);
+        System.out.println("enemy in range " + sqDistance);
         if (sqDistance <= sqRange && e.getDistTraveled() > furthestProgress) {
+          
           targetIndex = i;
           furthestProgress = e.getDistTraveled();
         }
@@ -33,16 +36,16 @@ public class HitScanTower extends Tower {
       }
       if (targetIndex != -1) {
         // A successfull attack has occured
-    	System.out.println("Hi-yah!");
+//    	System.out.println("Hi-yah!");
         setAttackCounter(attack.getAttackDelay());
         Enemy target = enemies.get(targetIndex);
         this.target = target;
         attack.cast(target, this, enemies);
       }
     } else {
-      setAttackCounter(getAttackCounter() - 1);
       this.target = null;
     }
+    setAttackCounter(getAttackCounter() - 1);
   }
 
   public HitScanAttack getAttack() {

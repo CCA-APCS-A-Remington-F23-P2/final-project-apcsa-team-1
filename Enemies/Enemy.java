@@ -32,6 +32,7 @@ public class Enemy extends Entity {
   }
 
   public void draw(Graphics g){
+	  System.out.println(self==null);
     g.drawImage(self, getX(), getY(), null);
   }
 
@@ -52,7 +53,7 @@ public class Enemy extends Entity {
   }
 
   public void setImage(Image self){
-    this.self = self;
+    this.self = self.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
   }
 
   public int getMaxHp() {

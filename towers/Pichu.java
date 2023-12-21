@@ -17,6 +17,18 @@ public class Pichu extends HitScanTower {
 
       }
   }
+  
+  public Pichu(int x, int y, int tier) {
+	    super(new Nuzzle(), UPGRADE_PRICES, RANGES, x, y);
+	    try{
+	      setImage(ImageIO.read(new File("images/Pichu.png")));
+	      } catch (Exception e){
+
+	      }
+	    for(int i = 0; i < tier; i++) {
+			  upgrade(Integer.MAX_VALUE);
+		  }
+	  }
 
 
   public int getPrice(){

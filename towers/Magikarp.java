@@ -16,6 +16,18 @@ public class Magikarp extends HitScanTower{
 
     }
   }
+  
+  public Magikarp(int x, int y, int tier){
+	    super(new Splash(), UPGRADE_PRICES, RANGES, x, y);
+	    try{
+	      setImage(ImageIO.read(new File("images/Magicarp.png")));
+	    } catch (Exception e){
+
+	    }
+	    for(int i = 0; i < tier; i++) {
+			  upgrade(Integer.MAX_VALUE);
+		  }
+	  }
 
   public int getPrice(){
     return PRICE;

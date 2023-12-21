@@ -233,7 +233,7 @@ for(int i=0; i<20; i++){
       for(Turn t: path){
         t.makeTurn(en);
       }
-      if(time % 5==0){
+      if(time % 10==0){
         en.move();
       }
       if(en.isDead()){
@@ -264,16 +264,21 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
 
 
     //Waves 
+    System.out.println(enemies);
      if(rounds[waveCount].size()>0){
-      if(time % 20  == 0){
+    	 System.out.println(waveDelay);
+      if(waveDelay<=0){
+    	  waveDelay = 20;
         enemies.add(rounds[waveCount].get(0));
         enemies.get(enemies.size()-1).setXPos(startX);
         enemies.get(enemies.size()-1).setYPos(startY);
         rounds[waveCount].remove(0);
       }
+      waveDelay--;
      }
     else{
       if(enemies.size() == 0){
+    	
         saveGame();
         try{
         nextWave.setImg(ImageIO.read(new File("images/NEXTWAVE.png")));
@@ -287,12 +292,21 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
 
   public void saveGame(){
     try{
-      String s = ""+mapNumber+" "+money+" "+score+" "+waveCount+" ";
+      String s = ""+mapNumber+" "+money+" "+score+" "+(waveCount+1)+" ";
+      for(Tower t : selectedTowers) {
+    	  s+="\n" + t.getInfo();
+      }
       for(Tower t: towers){
-        s += ;
+    	s+= "\n";
+    	if(t == null) {
+    		s+= null;
+    	} else {
+    	s += t.getInfo();
+    	}
       }
       saver = new FileWriter("save.txt",false);
       saver.write(s);
+      saver.close();
     } catch (Exception e) {
     }
   }
@@ -341,6 +355,7 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
       g.drawString("Wave: " + waveCount,20,40);
       for(Enemy e : enemies){
         e.draw(g);
+//        System.out.println("test");
       }
 
       for(Projectile p: projectiles){

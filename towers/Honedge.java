@@ -16,6 +16,18 @@ public class Honedge extends MeleeTower{
 
     }
   }
+  
+  public Honedge(int x, int y, int tier){
+	    super(new Slash(), UPGRADE_PRICES, RANGES, x, y);
+	    try{
+	      setImage(ImageIO.read(new File("images/Honedge.png")));
+	    } catch (Exception e){
+
+	    }
+	    for(int i = 0; i < tier; i++) {
+			  upgrade(Integer.MAX_VALUE);
+		  }
+	  }
 
   public int getPrice(){
     return PRICE;

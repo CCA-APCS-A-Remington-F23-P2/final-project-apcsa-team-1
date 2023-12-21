@@ -18,6 +18,18 @@ public class Charmander extends ProjectileTower{
       
     }
   }
+  
+  public Charmander(int x, int y, int tier){
+	    super(new Ember(1000, 1000, 0.0), UPGRADE_PRICES, RANGES ,x, y);
+	    try{
+	    setImage(ImageIO.read(new File("images/Charmander.png")));
+	    } catch (Exception e){
+	      
+	    }
+	    for(int i = 0; i < tier; i++) {
+			  upgrade(Integer.MAX_VALUE);
+		  }
+	  }
   public int getPrice(){
     return PRICE;
   }

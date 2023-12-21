@@ -202,7 +202,7 @@ public class Projectile extends Entity{
       }else if(angle >= 292.5 && angle < 337.5){
         direction = "315";
       }
-      g.drawImage(getDirectionalSprite(direction), getX(), getY());
+      g.drawImage(getDirectionalSprite(direction), getX(), getY(), null);
       
     }
 }
