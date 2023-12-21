@@ -14,7 +14,7 @@ public class Enemy extends Entity {
   private int money;
 
   public Enemy(int mhp, int speed, int xp, int yp, int money) {
-    super(xp, yp, 0 - speed, 0);
+    super(0-speed, 0, xp, yp);
     this.speed = speed;
     this.maxHp = mhp;
     hp = mhp;

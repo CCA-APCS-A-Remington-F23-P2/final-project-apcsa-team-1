@@ -1,7 +1,12 @@
 package towers;
 import Entity.Entity;
 import Enemies.Enemy;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class Projectile extends Entity{
      
@@ -26,6 +31,8 @@ public class Projectile extends Entity{
      *  180 T 0 
      *  135 90 45
      */
+
+    private String sprite;
     
     private int travel;
     
@@ -154,6 +161,22 @@ public class Projectile extends Entity{
     	}else {
     		return true;
     	}
+    }
+
+    public String getSprite() {
+      return this.sprite;
+    }
+
+    public void setSprite(String sprite) {
+      this.sprite = sprite;
+    }
+
+    public Image getDirectionalSprite(String direction){
+      try{
+        return ImageIO.read(new File("images/projectile_sprites/" + getSprite() + "/" + getSprite() + direction));
+      } catch (IOException e){
+        return null;
+      }
     }
     
 

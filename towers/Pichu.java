@@ -11,6 +11,11 @@ public class Pichu extends HitScanTower {
 
   public Pichu(int x, int y) {
     super(new Nuzzle(), UPGRADE_PRICES, RANGES, x, y);
+    try{
+      setImage(ImageIO.read(new File("images/Pichu.png")));
+      } catch (Exception e){
+
+      }
   }
 
   public int upgrade(int money) {

@@ -6,6 +6,7 @@ public class Waterfall extends HitScanAttack{
     public Waterfall(){
         super(750, 40);
         setSplashRadius(50);
+      setSprite("waterfall");
     }
     
     public void cast(Tower t, List<Enemy> enemyList){

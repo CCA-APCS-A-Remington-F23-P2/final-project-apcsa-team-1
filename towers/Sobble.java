@@ -24,7 +24,7 @@ public class Sobble extends HitScanTower{
       if(getTier()==1){
         setAttack(new WaterPulse());
         try{
-          setImage(ImageIO.read(new File("images/Drizzle.png")));
+          setImage(ImageIO.read(new File("images/Drizzile.png")));
           } catch (Exception e){
   
           }

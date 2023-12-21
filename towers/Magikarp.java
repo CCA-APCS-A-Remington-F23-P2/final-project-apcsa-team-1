@@ -33,7 +33,7 @@ public class Magikarp extends HitScanTower{
       } else if (getTier()==3){
         setAttack(new MegaWaterfall());
         try{
-          setImage(ImageIO.read(new File("images/Megagyrados.png")));
+          setImage(ImageIO.read(new File("images/Megagyarados.png")));
           } catch (Exception e){
   
           }

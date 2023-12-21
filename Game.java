@@ -225,7 +225,7 @@ for(int i=0; i<20; i++){
       for(Turn t: path){
         t.makeTurn(en);
       }
-      if(time%2==1){
+      if(time%10==0){
         en.move();
       }
       if(en.isDead()){
@@ -252,7 +252,7 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         e--;
       }
     }
-    System.out.println(enemies);
+  
 
 
     //Waves 
@@ -308,6 +308,8 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
           t.draw(g);
         }
       }
+      g.drawString("Money: " + money,20,20);
+      g.drawString("Wave: " + waveCount,20,40);
       for(Enemy e : enemies){
         e.draw(g);
       }
@@ -330,6 +332,10 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
     }
 
     public void dealWithClick(MouseEvent e) {
+
+      //for noel testing
+      System.out.println(e.getX() + ", " + e.getY());
+      
         if(nextWave.clicked(e) && enemies.size()==0){
           waveCount++;
           nextWave.setImg(null);
@@ -359,7 +365,9 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
           if(i == selectedTowers.size()){
             upgrade = true;
             options[i].setColor(Color.GREEN);
+            if(selected!=null){
             options[selectedTowers.indexOf(selected)].setColor(null);
+            }
             selected = null;
             return;
           }
@@ -371,7 +379,7 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         }
         for (int i = 0; i < towerSlots.length; i++) {
             if(towerSlots[i].clicked(e)){
-              if(upgrade && towers[i] != null){
+              if(upgrade && towers[i] != null && towers[i].getTier() != 3){
                 money = money - towers[i].upgrade(money);
               }
             if (buyTower(towers[i], selected)) {

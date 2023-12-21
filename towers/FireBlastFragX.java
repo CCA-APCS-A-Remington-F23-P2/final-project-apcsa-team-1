@@ -6,5 +6,6 @@ public class FireBlastFragX extends Projectile{
         super(30, angle, x, y, 100, 50, 3);
         setBurnDamage(30);
         setBurnDuration(5);
+        setSprite("fireBlastFragX");
     }
 }

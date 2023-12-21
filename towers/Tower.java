@@ -35,7 +35,7 @@ public class Tower {
 
 
 	public int getUpgradePrice() {
-		if(tier != 2){
+		if(tier != 3){
       return upgradePrices[tier];
     }
     return Integer.MAX_VALUE;

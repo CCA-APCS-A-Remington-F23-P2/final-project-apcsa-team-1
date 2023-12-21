@@ -6,5 +6,6 @@ public class FireBlast extends Projectile{
         super(40, angle, x, y, 80, 50, 1);
         setBurnDamage(10);
         setBurnDuration(3);
+        setSprite("fireBlast");
     }
 }

@@ -7,6 +7,7 @@ public class MegaWaterfall extends HitScanAttack{
     public MegaWaterfall(){
         super(500, 80);
         setStunDuration(300);
+        setSprite("megaWaterfall");
     }
     public void cast(Enemy target, Tower t, ArrayList<Enemy> enemyList){
         int xPos = t.getX();

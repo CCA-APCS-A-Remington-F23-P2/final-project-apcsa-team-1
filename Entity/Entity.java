@@ -76,6 +76,12 @@ public abstract class Entity{
     public int getHeight() {
     	return this.height;
     }
+    public void setWidth(int s) {
+      width = s;
+    }
+    public void setHeight(int s) {
+      height = s;
+    }
     public void setXPos(int s){
         xPos = s;
     }

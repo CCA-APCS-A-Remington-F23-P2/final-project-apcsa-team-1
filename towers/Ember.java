@@ -6,5 +6,6 @@ public class Ember extends Projectile{
         super(20, angle, x, y, 20, 60, 1);
         setBurnDamage(5);
         setBurnDuration(2);
+      setSprite("ember");
     }   
 }

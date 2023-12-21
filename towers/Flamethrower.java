@@ -6,5 +6,6 @@ public class Flamethrower extends Projectile{
         super(10, angle, x, y, 20, 75, 2);
         setBurnDamage(5);
         setBurnDuration(3);
+        setSprite("flamethrower");
     }
 }

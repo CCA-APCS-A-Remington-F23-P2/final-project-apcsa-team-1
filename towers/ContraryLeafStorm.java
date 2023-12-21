@@ -6,6 +6,7 @@ public class ContraryLeafStorm extends HitScanAttack{
   
   public ContraryLeafStorm(){
       super(250, 10);
+      setSprite("contraryLeafStorm");
   }
 	public void cast(Enemy target, Tower t, ArrayList<Enemy> enemies){
 	    target.takeDamage(getAttackDamage());
