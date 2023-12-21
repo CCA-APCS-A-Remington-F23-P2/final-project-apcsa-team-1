@@ -9,27 +9,29 @@ import java.io.File;
 
 public class ProjectileTower extends Tower {
 	private Projectile attack;
-  private Image self;
+
 	public ProjectileTower(Projectile attack, int[] upgradePrices, int[] ranges, int xPos, int yPos) {
 		super(upgradePrices, ranges, xPos, yPos);
 		this.setAttack(attack);
 	}
 
-	public void cast(ArrayList<Tower> towers, ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles) {
+  
+	public void cast(ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles) {
 		int targetIndex = -1;
 		int furthestProgress = -1;
 		int i = 0;
 		if (getAttackCounter() <= 0) {
 			for (Enemy e : enemies) {
-				int distance = (int) Math.sqrt((getX() - e.getX()) ^ 2 + (getY() - e.getY()) ^ 2);
-				if (distance <= getRange() && e.getDistTraveled() > furthestProgress) {
+				int sqDistance = (int) Math.pow((getX() - e.getX()),2) + (int) Math.pow((getY() - e.getY()), 2);
+        int sqRange = (int) Math.pow(getRange(),2);
+				if (sqDistance <= sqRange && e.getDistTraveled() > furthestProgress) {
 					targetIndex = i;
 					furthestProgress = e.getDistTraveled();
-					setAttackCounter(attack.getAttackDelay());
 				}
 				i++;
 			}
 			if (targetIndex != -1) {
+        setAttackCounter(attack.getAttackDelay());
 				Enemy target = enemies.get(targetIndex);
 				double angle = Math.atan2(getY() - target.getY(), getX() - target.getX());
 				if(angle < 0) {
@@ -50,7 +52,7 @@ public class ProjectileTower extends Tower {
 		this.attack = attack;
 	}
   
-  // synonyms
+  // synonyms Thank you for this very nice syntax !!!!!! - Noel y Zhang 2007 @ gmail.com 
   public Projectile getProjectile(){
     return getAttack();
   }
@@ -59,10 +61,4 @@ public class ProjectileTower extends Tower {
     setAttack(attack);
   }
   
-  public void setImage(Image self){
-    this.self = self;
-  }
-  public void draw(Graphics g){
-    g.drawImage(self,getX(),getY(),null);
-  }
 }

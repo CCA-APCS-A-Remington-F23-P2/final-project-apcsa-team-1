@@ -1,4 +1,5 @@
 package towers;
+
 import java.io.IOException;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -17,8 +18,10 @@ public class Charmander extends ProjectileTower{
       
     }
   }
-  public void upgrade(){
-    super.upgrade();
+  public int upgrade(int money){
+    int cost = 0;
+    if(UPGRADE_PRICES[getTier()] <= money){
+    cost = super.upgrade(money);
     if(getTier()==1){
       setProjectile(new Flamethrower(1000, 1000, 0.0));
       try{
@@ -41,6 +44,7 @@ public class Charmander extends ProjectileTower{
 
         }
     }
+    }
+    return cost;
   }
-
 }

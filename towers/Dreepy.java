@@ -18,24 +18,28 @@ public class Dreepy extends ProjectileTower{
       }
     }
 
-    public void upgrade(){
-      super.upgrade();
-      if(getTier()==1){
-        setAttack(new ShadowBall(1000, 1000, 0));
-        try{
-          setImage(ImageIO.read(new File("images/Drakloak.png")));
-          } catch (Exception e){
-
-          }
-      } else if (getTier()==2){
-        setAttack(new DragonDarts(1000, 1000, 0));
-        try{
-          setImage(ImageIO.read(new File("images/Dragapult.png")));
-          } catch (Exception e){
-
-          }
-      } else if (getTier()==3){
-        setAttack(new DragonDarts(1000, 1000, 0));
-      }
+    public int upgrade(int money){
+      int cost = 0;
+      if(UPGRADE_PRICES[getTier()] <= money){
+        cost = super.upgrade(money);
+        if(getTier()==1){
+          setAttack(new ShadowBall(1000, 1000, 0));
+          try{
+            setImage(ImageIO.read(new File("images/Drakloak.png")));
+            } catch (Exception e){
+  
+            }
+        } else if (getTier()==2){
+          setAttack(new DragonDarts(1000, 1000, 0));
+          try{
+            setImage(ImageIO.read(new File("images/Dragapult.png")));
+            } catch (Exception e){
+  
+            }
+        } else if (getTier()==3){
+          setAttack(new DragonDarts(1000, 1000, 0));
+        }
+    }
+      return cost;
     }
 }

@@ -11,7 +11,6 @@ public class Cleffa extends Tower {
   public static final int PRICE = 75;
   public static final int [] UPGRADE_PRICES = {100,200,300};
   public static final int [] RANGES = {20,20,20,20};
-  private Image self;
 
   public Cleffa(int x, int y){
     super(UPGRADE_PRICES, RANGES, x, y);
@@ -22,13 +21,11 @@ public class Cleffa extends Tower {
     }
   }
 
-  public void upgrade(){
-    super.upgrade();
-  }
-  public void setImage(Image self){
-    this.self = self;
-  }
-  public void draw(Graphics g){
-    g.drawImage(self,getX(),getY(),null);
+  public int upgrade(int money){
+    int cost = 0;
+    if(UPGRADE_PRICES[getTier()] <= money){
+      cost = super.upgrade(money);
+    }
+    return cost;
   }
 }

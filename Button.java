@@ -56,6 +56,10 @@ public class Button{
     g.drawString(text, x+width/2-g.getFontMetrics().stringWidth(text)/2, y+height/2 + f.getSize()/2);
       }
     } else {
+      if(c != null){
+        g.setColor(c);
+        g.fillRect(x, y, width, height);
+      }
       g.drawImage(img,x,y,null);
     }
   }
@@ -69,4 +73,18 @@ public class Button{
     }
     this.img = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
   }
+
+  public int getX(){
+    return x;
+  }
+  public void setX(int s){
+    x=s;
+  }
+  public int getY(){
+    return y;
+  }
+  public void setY(int s){
+    y=s;
+  }
+  
 }

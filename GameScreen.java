@@ -120,6 +120,9 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
 
     public void actionPerformed(ActionEvent evt) {
         repaint();
+      if(game != null){
+      game.update();
+      }
     }
     public void paintComponent(Graphics g) {
         if (state == 0) {
@@ -203,11 +206,11 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
             if (startGame.clicked(e) && selection.size() == 6) {
                 state++;
                 if (selectedMap == 1) {
-                    game = new Game1(selection);
+                    game = new Game1(selection, selectionImg);
                     System.out.println("game1");
                   return;
                 } else {
-                    game = new Game2(selection);
+                    game = new Game2(selection,selectionImg);
                   System.out.println("game1");
                 }
                 return;

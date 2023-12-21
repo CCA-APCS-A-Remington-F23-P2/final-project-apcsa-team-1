@@ -3,9 +3,10 @@ import Enemies.Enemy;
 import java.util.ArrayList;
 
 public class ContraryLeafStorm extends HitScanAttack{
-    public ContraryLeafStorm(){
-        super(250, 10);
-    }
+  
+  public ContraryLeafStorm(){
+      super(250, 10);
+  }
 	public void cast(Enemy target, Tower t, ArrayList<Enemy> enemies){
 	    target.takeDamage(getAttackDamage());
 	    if(getAttackDelay() >= 50){

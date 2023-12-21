@@ -24,15 +24,15 @@ import java.awt.Color;
 
 public class Game2 extends Game{
 
-  public Game2(ArrayList<String> towers) {
-    super(towers);
+  public Game2(ArrayList<String> towers,ArrayList<Image> img) {
+    super(towers, 880, 225,img);
     
     try {
       setImg(ImageIO.read(new File("images/map 2.png")));
     } catch (IOException e) {
 
     }
-
+       setSelectCord(310,0);
     
     Button[] towerSlots = new Button[12];
     towerSlots[0] = new Button(145, 215, 20, 20);
@@ -62,8 +62,6 @@ public class Game2 extends Game{
     path[9] = new Turn(343, 490, "left");
     path[10] = new Turn(195, 490, "down");
     setPath(path);
-    setStartX(880);
-    setStartY(225);
   }
   
 

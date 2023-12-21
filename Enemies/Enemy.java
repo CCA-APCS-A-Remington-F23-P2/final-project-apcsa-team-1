@@ -1,6 +1,7 @@
 package Enemies;
 
 import Entity.Entity;
+import java.awt.Graphics;
 
 public class Enemy extends Entity {
   private int maxHp;
@@ -16,11 +17,15 @@ public class Enemy extends Entity {
     super(xp, yp, 0 - speed, 0);
     this.speed = speed;
     this.maxHp = mhp;
-    maxHp = mhp;
+    hp = mhp;
     burnCounter = 0;
     stunCounter = 0;
     slowCounter = 0;
     this.money = money;
+  }
+
+  public void draw(Graphics g){
+    g.drawString(""+getClass(),getX(),getY());
   }
 
   public void takeDamage(int d) {
@@ -39,7 +44,7 @@ public class Enemy extends Entity {
     maxHp = s;
   }
 
-  public int setMaxHp() {
+  public int getMaxHp() {
     return maxHp;
   }
 
@@ -63,22 +68,20 @@ public class Enemy extends Entity {
     slowCounter = s;
   }
 
-  public int getBurnCounter(int s) {
+  public int getBurnCounter() {
     return burnCounter;
   }
 
-  public int getStunCounter(int s) {
+  public int getStunCounter() {
     return stunCounter;
   }
 
-  public int getSlowCounter(int s) {
+  public int getSlowCounter() {
     return slowCounter;
   }
 
   public boolean isDead() {
-    if (hp > 0)
-      return false;
-    return true;
+    return hp <= 0;
   }
 
   public int getDistTraveled() {
@@ -102,5 +105,4 @@ public class Enemy extends Entity {
     super.move();
     distTraveled += speed;
   }
-
 }

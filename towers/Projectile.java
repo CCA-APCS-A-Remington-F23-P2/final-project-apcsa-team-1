@@ -133,6 +133,14 @@ public class Projectile extends Entity{
     public void setPierce(int p){
         pierce = p;
     }
+
+    public ArrayList<Enemy> getEnemiesHit(){
+      return enemiesHit;
+    }
+
+    public void hitEnemy(Enemy e){
+      enemiesHit.add(e);
+    }
     
     public boolean moveAndCheck() {
     	/**

@@ -24,13 +24,14 @@ import java.io.IOException;
 
 public class Game1 extends Game {
 
-  public Game1(ArrayList<String> towers){
-        super(towers);
+  public Game1(ArrayList<String> towers, ArrayList<Image> img){
+        super(towers, 962, 232,img);
       try {
         setImg(ImageIO.read(new File("images/map 1.png")));
       } catch (IOException e) {
 
       }
+        setSelectCord(520,0);
         
         Button[] towerSlots = new Button[13];
         towerSlots[0] = new Button(95, 104, 20, 20);
@@ -59,8 +60,6 @@ public class Game1 extends Game {
         path[8] = new Turn(915, 300, "up");
         path[9] = new Turn(915, 540, "left");
       setPath(path);
-    setStartX(962);
-    setStartY(232);
     }
 
 }

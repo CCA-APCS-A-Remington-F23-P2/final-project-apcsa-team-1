@@ -10,15 +10,13 @@ import java.io.File;
 public class MeleeTower extends Tower {
 	private MeleeAttack attack;
 
-  private Image self;
-
 	public MeleeTower(MeleeAttack attack, int[] upgradePrices, int[] ranges, int xPos,
                      int yPos) {
     super(upgradePrices, ranges, xPos, yPos);
     this.setAttack(attack);
 	}
 
-	public void cast(ArrayList<Tower> towers, ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles) {
+	public void cast(ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles) {
 		int targetIndex = -1;
 		int furthestProgress = -1;
 		int i = 0;
@@ -28,11 +26,11 @@ public class MeleeTower extends Tower {
 				if (distance <= getRange() && e.getDistTraveled() > furthestProgress) {
 					targetIndex = i;
 					furthestProgress = e.getDistTraveled();
-					setAttackCounter(attack.getAttackDelay());
 				}
 				i++;
 			}
 			if (targetIndex != -1) {
+        setAttackCounter(attack.getAttackDelay());
 				Enemy target = enemies.get(targetIndex);
 				attack.cast(target, this, enemies);
 			}
@@ -49,10 +47,4 @@ public class MeleeTower extends Tower {
 		this.attack = attack;
 	}
 
-  public void setImage(Image self){
-    this.self = self;
-  }
-  public void draw(Graphics g){
-    g.drawImage(self,getX(),getY(),null);
-  }
 }

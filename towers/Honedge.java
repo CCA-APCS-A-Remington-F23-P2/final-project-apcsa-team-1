@@ -17,24 +17,28 @@ public class Honedge extends MeleeTower{
     }
   }
 
-  public void upgrade(){
-    super.upgrade();
-    if(getTier()==1){
-      setAttack(new NightSlash());
-      try{
-        setImage(ImageIO.read(new File("images/Doublade.png")));
-        } catch (Exception e){
-
-        }
-    } else if (getTier()==2){
-      setAttack(new SacredSword());
-      try{
-        setImage(ImageIO.read(new File("images/Aegislash.png")));
-        } catch (Exception e){
-
-        }
-    } else if (getTier()==3){
-      setAttack(new SacredSword());
+  public int upgrade(int money){
+    int cost = 0;
+    if(UPGRADE_PRICES[getTier()] <= money){
+      cost = super.upgrade(money);
+      if(getTier()==1){
+        setAttack(new NightSlash());
+        try{
+          setImage(ImageIO.read(new File("images/Doublade.png")));
+          } catch (Exception e){
+  
+          }
+      } else if (getTier()==2){
+        setAttack(new SacredSword());
+        try{
+          setImage(ImageIO.read(new File("images/Aegislash.png")));
+          } catch (Exception e){
+  
+          }
+      } else if (getTier()==3){
+        setAttack(new SacredSword());
+      }
     }
+    return cost;
   }
 }
