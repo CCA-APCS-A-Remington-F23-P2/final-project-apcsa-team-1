@@ -33,6 +33,7 @@ public class HitScanTower extends Tower {
       }
       if (targetIndex != -1) {
         // A successfull attack has occured
+    	System.out.println("Hi-yah!");
         setAttackCounter(attack.getAttackDelay());
         Enemy target = enemies.get(targetIndex);
         this.target = target;
@@ -55,57 +56,83 @@ public class HitScanTower extends Tower {
     super.draw(g);
     if(target !=null){
       // Draw a graphic connecting the tower to the enemy
-      double angle = Math.atan2(getY() - target.getY(), getX() - target.getX());
-      if(angle < 360.0){
-        angle += 360.0;
-      }
-      String graphicAngle = "";
-      boolean vertical = false;
-      if(angle < 45 || angle > 315){
-        graphicAngle = "0";
-      }else if(angle > 45 && angle < 135){
-        graphicAngle = "90";
-        vertical = true;
-      }else if(angle > 135 && angle < 225){
-        graphicAngle = "180";
-      }else if(angle > 225 && angle < 315){
-        graphicAngle = "270";
-        vertical = true;
-      }else{
-        System.out.println("What the heck bro Skibidi Ohio Gyatt Rizz");
-      }
-      System.out.println(graphicAngle);
-      int numTesselations;
-      int offset;
-      if(vertical){
-        numTesselations = Math.abs(getY() - target.getY()) / 10 + 1;
-        offset = (target.getX() - getX()) / numTesselations;
-      }else{
-        numTesselations = Math.abs(getX() - target.getX()) / 10 + 1;
-        offset = (target.getY() - getY()) / numTesselations;        
-      }
-      if(graphicAngle.equals("0")){
-        // -->
-        for(int x = 0; x < numTesselations; x++){
-          g.drawImage(getAttack().getDirectionalSprite("0"), getX() + x*10, getY() + offset*x, null);
-        }
-      }else if(graphicAngle.equals("90")){
-        // ^ 
-        // |
-        for(int y = 0; y < numTesselations; y++){
-          g.drawImage(getAttack().getDirectionalSprite("90"), getY() + offset*y, getY() - y*10 , null);
-        }
-      }else if(graphicAngle.equals("180")){
-        // <--
-        for(int x = 0; x < numTesselations; x++){
-          g.drawImage(getAttack().getDirectionalSprite("180"), getX() - x*10, getY() + offset*x, null);
-        }
-      }else if(graphicAngle.equals("270")){
-        // |
-        // V
-        for(int y = 0; y < numTesselations; y++){
-          g.drawImage(getAttack().getDirectionalSprite("270"), getY() + offset*y, getY() + y*10, null);
-        }
+      // Special cases: megaWaterfall, waterfall, thunder all just spawn a graphic on the target
+      // waterGun tesselates every 20 (sorry)
+      if(getAttack().getSprite().equals("megaWaterfall") || getAttack().getSprite().equals("waterfall") || getAttack().getSprite().equals("thunder")) {
+    	  g.drawImage(getAttack().getDirectionalSprite(""), target.getX(), target.getY(), null);
+      }else {
+	      double angle = Math.atan2(getY() - target.getY(), getX() - target.getX());
+	      if(angle < 360.0){
+	        angle += 360.0;
+	      }
+	      String graphicAngle = "";
+	      boolean vertical = false;
+	      if(angle < 45 || angle > 315){
+	        graphicAngle = "0";
+	      }else if(angle > 45 && angle < 135){
+	        graphicAngle = "90";
+	        vertical = true;
+	      }else if(angle > 135 && angle < 225){
+	        graphicAngle = "180";
+	      }else if(angle > 225 && angle < 315){
+	        graphicAngle = "270";
+	        vertical = true;
+	      }else{
+	        System.out.println("What the heck bro Skibidi Ohio Gyatt Rizz");
+	      }
+	      System.out.println(graphicAngle);
+	      int numTesselations;
+	      int offset;
+	      if(vertical){
+	        numTesselations = Math.abs(getY() - target.getY()) / 10 + 1;
+	        offset = (target.getX() - getX()) / numTesselations;
+	      }else{
+	        numTesselations = Math.abs(getX() - target.getX()) / 10 + 1;
+	        offset = (target.getY() - getY()) / numTesselations;        
+	      }
+	      if(getAttack().getSprite().equals("waterGun")) {
+	    	  numTesselations /= 2;
+	    	  offset *= 2;
+	      }
+	      if(graphicAngle.equals("0")){
+	        // -->
+	        for(int x = 0; x < numTesselations; x++){
+	          g.drawImage(getAttack().getDirectionalSprite("0"), getX() + x*10, getY() + offset*x, null);
+	          System.out.println("Drawing a thing");
+	          if(getAttack().getSprite().equals("waterGun")) {
+	        	  x++;
+	          }
+	        }
+	      }else if(graphicAngle.equals("90")){
+	        // ^ 
+	        // |
+	        for(int y = 0; y < numTesselations; y++){
+	          g.drawImage(getAttack().getDirectionalSprite("90"), getX() + offset*y, getY() - y*10 , null);
+	          System.out.println("Drawing a thing");
+	          if(getAttack().getSprite().equals("waterGun")) {
+	        	  y++;
+	          }
+	        }
+	      }else if(graphicAngle.equals("180")){
+	        // <--
+	        for(int x = 0; x < numTesselations; x++){
+	          g.drawImage(getAttack().getDirectionalSprite("180"), getX() - x*10, getY() + offset*x, null);
+	          System.out.println("Drawing a thing");
+	          if(getAttack().getSprite().equals("waterGun")) {
+	        	  x++;
+	          }
+	        }
+	      }else if(graphicAngle.equals("270")){
+	        // |
+	        // V
+	        for(int y = 0; y < numTesselations; y++){
+	          g.drawImage(getAttack().getDirectionalSprite("270"), getX() + offset*y, getY() + y*10, null);
+	          System.out.println("Drawing a thing");
+	          if(getAttack().getSprite().equals("waterGun")) {
+	        	  y++;
+	          }
+	        }
+	      }
       }
     }
     
