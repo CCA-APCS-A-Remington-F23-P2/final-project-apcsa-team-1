@@ -22,13 +22,23 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.awt.Font;
+
+import java.io.FileWriter;   // Import the FileWriter class
+
 
 public abstract class Game {
+
+    private FileWriter saver;
+    private File save;
+
+    private int mapNumber;
+  
     private int time;
     private int counter;
     private int money;
     private int score;
-
+    
     private ArrayList<Enemy>[] rounds;
     private int waveCount;
 
@@ -43,6 +53,8 @@ public abstract class Game {
   
     private Tower selected;
     private boolean upgrade;
+    private Image coin;
+    private Font gameFont;
 
     private ArrayList<Enemy> enemies;
     private ArrayList<Projectile> projectiles;
@@ -59,6 +71,7 @@ public abstract class Game {
 
 
   public Game(ArrayList < String > towerSelection, int x,int y, ArrayList<Image> selectedImages) {
+    
     selectedTowers = new ArrayList<Tower>();
     options = new Button[towerSelection.size() + 1];
     nextWave = new Button(930,22,60,60); 
@@ -68,9 +81,11 @@ public abstract class Game {
     try{
     this.selectedImages = selectedImages; // sad ruined my coding expiernece  : (
     selectedImages.add(ImageIO.read(new File("images/Upgrade.png")));
+      coin = ImageIO.read(new File("images/Coin.png"));
     } catch (Exception e){
 
     }
+    gameFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
       money = 100000;
       score = 0;
     waveCount = 0;
@@ -186,16 +201,9 @@ for(int i=0; i<20; i++){
     }
 
 
-  public void setTowerSelects(int x, int y){
-    return;
-  }
 
   public void update(){
-    counter++;
-    if(counter >=15){
     time++;
-    counter = 0;
-    } 
     
 
     // Cast towers (attacks)
@@ -225,7 +233,7 @@ for(int i=0; i<20; i++){
       for(Turn t: path){
         t.makeTurn(en);
       }
-      if(time%10==0){
+      if(time % 10==0){
         en.move();
       }
       if(en.isDead()){
@@ -256,16 +264,22 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
 
 
     //Waves 
+    System.out.println(enemies);
      if(rounds[waveCount].size()>0){
-      if(waveDelay <= 0){
+    	 System.out.println(waveDelay);
+      if(waveDelay<=0){
+    	  waveDelay = 20;
         enemies.add(rounds[waveCount].get(0));
+        enemies.get(enemies.size()-1).setXPos(startX);
+        enemies.get(enemies.size()-1).setYPos(startY);
         rounds[waveCount].remove(0);
-        waveDelay = 30;
       }
-      else waveDelay--;
+      waveDelay--;
      }
     else{
       if(enemies.size() == 0){
+    	
+        saveGame();
         try{
         nextWave.setImg(ImageIO.read(new File("images/NEXTWAVE.png")));
         } catch (Exception e) {
@@ -273,7 +287,33 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         }
       }
     }
+    
   }
+
+  public void saveGame(){
+    try{
+      String s = ""+mapNumber+" "+money+" "+score+" "+(waveCount+1)+" ";
+      for(Tower t : selectedTowers) {
+    	  s+="\n" + t.getInfo();
+      }
+      for(Tower t: towers){
+    	s+= "\n";
+    	if(t == null) {
+    		s+= null;
+    	} else {
+    	s += t.getInfo();
+    	}
+      }
+      saver = new FileWriter("save.txt",false);
+      saver.write(s);
+      saver.close();
+    } catch (Exception e) {
+    }
+  }
+
+    public void setMap(int num){
+      mapNumber = num;
+    }
 
 
 
@@ -307,11 +347,19 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         if(t!=null){
           t.draw(g);
         }
+
       }
-      g.drawString("Money: " + money,20,20);
+      g.drawImage(coin,20,500,null);
+      g.setFont(gameFont);
+      g.drawString("" + money,80,550);
       g.drawString("Wave: " + waveCount,20,40);
       for(Enemy e : enemies){
         e.draw(g);
+//        System.out.println("test");
+      }
+
+      for(Projectile p: projectiles){
+        p.draw(g);
       }
     }
 
@@ -408,7 +456,6 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
                 towers[i] = new Sobble(towerSlots[i].getX(), towerSlots[i].getY());
               }
             }
-          //Need to do the upgrade code here rq
             }
         }
     }
@@ -422,8 +469,8 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         if (t != null || toBeAdded == null) {
             return false;
         }
-        if (money >= toBeAdded.PRICE) {
-            money -= toBeAdded.PRICE;
+        if (money >= toBeAdded.getPrice()) {
+          money -= toBeAdded.getPrice();
             return true;
         }
         return false;

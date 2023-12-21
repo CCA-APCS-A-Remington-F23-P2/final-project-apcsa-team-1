@@ -20,6 +20,21 @@ public class Cleffa extends Tower {
 
     }
   }
+  
+  public Cleffa(int x, int y, int tier){
+	    super(UPGRADE_PRICES, RANGES, x, y);
+	    try{
+	      setImage(ImageIO.read(new File("images/Cleffa.png")));
+	    } catch (Exception e){
+
+	    }
+	    for(int i = 0; i < tier; i++) {
+			  upgrade(Integer.MAX_VALUE);
+		  }
+	  }
+  public int getPrice(){
+    return PRICE;
+  }
 
   public int upgrade(int money){
     int cost = 0;

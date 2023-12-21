@@ -9,14 +9,27 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
+
+import towers.Charmander;
+import towers.Cleffa;
+import towers.Dreepy;
+import towers.Honedge;
+import towers.Magikarp;
+import towers.Pichu;
+import towers.Snivy;
+import towers.Sobble;
+import towers.Tower;
+
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
+import java.util.Scanner;
 
 public class GameScreen extends JPanel implements ActionListener, MouseListener {
     private int state;
@@ -60,10 +73,14 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
     Game game;
 
     public GameScreen() {
+    	gameToLoad = false;
         selection = new ArrayList < String > ();
         //CHECK IF THE GAME INFO FILE IS EMPTY OR NOT!
+        System.out.println(new File("save.txt").length());
+        if(new File("save.txt").length() > 5) {
+        	gameToLoad = true;
+        }
 
-        gameToLoad = false;
         try {
             title = ImageIO.read(new File("images/Title.png"));
             background = ImageIO.read(new File("images/Background.png"));
@@ -121,7 +138,7 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
     public void actionPerformed(ActionEvent evt) {
         repaint();
       if(game != null){
-      game.update();
+        game.update();
       }
     }
     public void paintComponent(Graphics g) {
@@ -146,6 +163,7 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
         }
         newGameButton.draw(g);
         //Start new game button
+        
         loadButton.draw(g);
         // load latest button
         if (selectedMap == 1) {
@@ -201,6 +219,31 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
                 selectedMap = (selectedMap == 2) ? 0 : 2;
             } else if (loadButton.clicked(e)) {
                 System.out.println("Yay loading game..");
+                try {
+					Scanner s = new Scanner(new File("save.txt"));
+					String line = s.nextLine();
+					Scanner forALine = new Scanner(line);
+					int map = forALine.nextInt();
+					int money  = forALine.nextInt();
+					int score = forALine.nextInt();
+					int wave = forALine.nextInt();
+					for(int i = 0; i < 6;i++) {
+//						selectedTowers.add(s.nextLine().substring(i));
+					}
+					Tower[] towers = new Tower[11];
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                
+                
+                //Code this
+                
+                
+                
+                
+                
+                
             }
         } else if (state == 1) {
             if (startGame.clicked(e) && selection.size() == 6) {
@@ -305,6 +348,35 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
             System.out.println(selection);
         } else if (state == 2) {
             game.dealWithClick(e);
+        }
+    }
+    
+    public Tower getTowerFromString(String s) {
+    	Scanner scan = new Scanner(s);
+    	String dummy = scan.next();
+    	String className = scan.next();
+    	int tier = scan.nextInt();
+    	int x = scan.nextInt();
+    	int y = scan.nextInt();
+    	if (s.equals("towers.Snivy")) {
+    		return new Snivy(x, y, tier);
+        } else if (s.equals("towers.Dreepy")) {
+            return new Dreepy(x, y, tier);
+        } else if (s.equals("towers.Pichu")) {
+        	return new Pichu(x, y, tier);
+        } else if (s.equals("towers.Charmander")) {
+            return new Charmander(x, y, tier);
+        } else if (s.equals("towers.Sobble")) {
+            return new Sobble(x, y, tier);
+        } else if (s.equals("towers.Magikarp")) {
+            return new Magikarp(x, y, tier);
+        } else if (s.equals("towers.Cleffa")) {
+            return new Cleffa(x, y, tier);
+        } else if (s.equals("towers.Honedge")) {
+            return new Honedge(x, y, tier);
+        } else {
+        	System.out.println("Invalid tower class");
+        	return null;
         }
     }
 

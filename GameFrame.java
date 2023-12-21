@@ -9,6 +9,7 @@ public class GameFrame extends JFrame{
     super("Poke-Defense");
 
     setSize(WIDTH,HEIGHT);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
 
   
   }

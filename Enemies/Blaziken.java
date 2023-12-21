@@ -1,5 +1,9 @@
 package Enemies;
 
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.File;
+
 public class Blaziken extends Enemy{
 
     private int speedBoostCounter;
@@ -9,6 +13,11 @@ public class Blaziken extends Enemy{
         super(35, 6, xp, yp, 50);
         speedBoostCounter = 300;
         speedBoostLevel = 1;
+      try{
+        setImage(ImageIO.read(new File("images/Blaziken.png")));
+      } catch (Exception e){
+
+      }
     }
 
     @Override

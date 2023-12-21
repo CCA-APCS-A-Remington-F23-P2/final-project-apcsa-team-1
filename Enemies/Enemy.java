@@ -1,7 +1,13 @@
 package Enemies;
 
+import java.util.ArrayList; 
 import Entity.Entity;
+import java.awt.Image;
 import java.awt.Graphics;
+import java.io.IOException;
+import java.io.File;
+import javax.imageio.ImageIO;
+
 
 public class Enemy extends Entity {
   private int maxHp;
@@ -12,6 +18,7 @@ public class Enemy extends Entity {
   private int slowCounter;
   private int distTraveled;
   private int money;
+  private Image self;
 
   public Enemy(int mhp, int speed, int xp, int yp, int money) {
     super(0-speed, 0, xp, yp);
@@ -25,7 +32,8 @@ public class Enemy extends Entity {
   }
 
   public void draw(Graphics g){
-    g.drawString(""+getClass(),getX(),getY());
+	  System.out.println(self==null);
+    g.drawImage(self, getX(), getY(), null);
   }
 
   public void takeDamage(int d) {
@@ -42,6 +50,10 @@ public class Enemy extends Entity {
 
   public void setMaxHp(int s) {
     maxHp = s;
+  }
+
+  public void setImage(Image self){
+    this.self = self.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
   }
 
   public int getMaxHp() {

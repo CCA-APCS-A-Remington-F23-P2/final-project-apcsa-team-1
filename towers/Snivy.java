@@ -16,7 +16,24 @@ public class Snivy extends HitScanTower {
 
     }
   }
+  
+  public Snivy(int x, int y, int tier) {
+	  super(new VineWhip(), UPGRADE_PRICES, RANGES, x, y);
+	  try {
+	      setImage(ImageIO.read(new File("images/Snivy.png")));
+	    } catch (Exception e) {
 
+	    }
+	  for(int i = 0; i < tier; i++) {
+		  upgrade(Integer.MAX_VALUE);
+	  }
+  }
+
+
+  public int getPrice(){
+    return PRICE;
+  }
+  
   public int upgrade(int money) {
     int cost = 0; 
     if (UPGRADE_PRICES[getTier()] <= money) {
