@@ -32,6 +32,7 @@ public class Game1 extends Game {
 
       }
         setSelectCord(520,0);
+        setMap(1);
         
         Button[] towerSlots = new Button[13];
         towerSlots[0] = new Button(85, 94, 55, 55);

@@ -18,6 +18,10 @@ public class Dreepy extends ProjectileTower{
       }
     }
 
+  public int getPrice(){
+    return PRICE;
+  }
+  
     public int upgrade(int money){
       int cost = 0;
       if(UPGRADE_PRICES[getTier()] <= money){

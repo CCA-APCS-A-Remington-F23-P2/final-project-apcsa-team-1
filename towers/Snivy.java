@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 public class Snivy extends HitScanTower {
   public static final int PRICE = 30;
   public static final int [] UPGRADE_PRICES = {75, 150, 250};
-  public static final int [] RANGES = {40, 50, 60, 70};
+  public static final int [] RANGES = {60, 60, 70, 80};
 
   public Snivy(int x, int y) {
     super(new VineWhip(), UPGRADE_PRICES, RANGES, x, y);
@@ -17,6 +17,11 @@ public class Snivy extends HitScanTower {
     }
   }
 
+
+  public int getPrice(){
+    return PRICE;
+  }
+  
   public int upgrade(int money) {
     int cost = 0; 
     if (UPGRADE_PRICES[getTier()] <= money) {

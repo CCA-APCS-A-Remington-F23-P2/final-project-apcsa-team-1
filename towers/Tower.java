@@ -5,7 +5,7 @@ import Enemies.Enemy;
 import java.awt.Image;
 import java.awt.Graphics;
 
-public class Tower {
+public class Tower implements Serializable{
   private int tier;
 	public int PRICE;
 	private int[] upgradePrices;

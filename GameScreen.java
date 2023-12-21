@@ -121,7 +121,7 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
     public void actionPerformed(ActionEvent evt) {
         repaint();
       if(game != null){
-      game.update();
+        game.update();
       }
     }
     public void paintComponent(Graphics g) {

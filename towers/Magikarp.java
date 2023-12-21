@@ -17,6 +17,10 @@ public class Magikarp extends HitScanTower{
     }
   }
 
+  public int getPrice(){
+    return PRICE;
+  }
+  
   public int upgrade(int money){
     int cost = 0;
     if(UPGRADE_PRICES[getTier()] <= money){

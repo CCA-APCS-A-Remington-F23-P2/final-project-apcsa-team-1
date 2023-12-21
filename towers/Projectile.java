@@ -178,6 +178,31 @@ public class Projectile extends Entity{
         return null;
       }
     }
-    
 
+    public void draw(Graphics g){
+      double angle = Math.atan2(getYSpeed(), getXSpeed());
+      if(angle < 360){
+        angle += 360.0;
+      }
+      String direction = "";
+      if(angle < 22.5 || angle >= 337.5){
+        direction = "0";
+      }else if(angle >= 22.5 && angle < 67.5){
+        direction = "45";
+      }else if(angle >= 67.5 && angle < 112.5){
+        direction = "90";
+      }else if(angle >= 112.5 && angle < 157.5){
+        direction = "135";
+      }else if(angle >= 157.5 && angle < 202.5){
+        direction = "180";
+      }else if(angle >= 202.5 && angle < 247.5){
+        direction = "225";
+      }else if(angle >= 247.5 && angle < 292.5){
+        direction = "270";
+      }else if(angle >= 292.5 && angle < 337.5){
+        direction = "315";
+      }
+      g.drawImage(getDirectionalSprite(direction), getX(), getY());
+      
+    }
 }

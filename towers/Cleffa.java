@@ -20,6 +20,9 @@ public class Cleffa extends Tower {
 
     }
   }
+  public int getPrice(){
+    return PRICE;
+  }
 
   public int upgrade(int money){
     int cost = 0;

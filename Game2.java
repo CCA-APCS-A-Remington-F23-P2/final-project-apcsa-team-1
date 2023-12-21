@@ -33,6 +33,7 @@ public class Game2 extends Game{
 
     }
        setSelectCord(310,0);
+        setMap(2);
     
     Button[] towerSlots = new Button[12];
     towerSlots[0] = new Button(133, 204, 47, 47); //ordered from end to start
