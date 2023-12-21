@@ -37,7 +37,7 @@ public class Dreepy extends ProjectileTower{
   
             }
         } else if (getTier()==3){
-          setAttack(new DragonDarts(1000, 1000, 0));
+          setAttack(new DragonBarrage(1000, 1000, 0));
         }
     }
       return cost;

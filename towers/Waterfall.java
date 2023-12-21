@@ -4,7 +4,7 @@ import Enemies.Enemy;
 
 public class Waterfall extends HitScanAttack{
     public Waterfall(){
-        super(750, 40);
+        super(2, 40);
         setSplashRadius(50);
       setSprite("waterfall");
     }

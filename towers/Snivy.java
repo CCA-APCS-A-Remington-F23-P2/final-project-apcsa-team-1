@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 public class Snivy extends HitScanTower {
   public static final int PRICE = 30;
   public static final int [] UPGRADE_PRICES = {75, 150, 250};
-  public static final int [] RANGES = {40, 50, 60, 70};
+  public static final int [] RANGES = {50, 100, 150, 200};
 
   public Snivy(int x, int y) {
     super(new VineWhip(), UPGRADE_PRICES, RANGES, x, y);

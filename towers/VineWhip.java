@@ -2,7 +2,7 @@ package towers;
 
 public class VineWhip extends HitScanAttack{
     public VineWhip(){
-        super(1000, 10);
+        super(5, 10);
         setSprite("vineWhip");
     }
 }

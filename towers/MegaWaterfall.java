@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class MegaWaterfall extends HitScanAttack{
     public MegaWaterfall(){
-        super(500, 80);
+        super(2, 80);
         setStunDuration(300);
         setSprite("megaWaterfall");
     }
