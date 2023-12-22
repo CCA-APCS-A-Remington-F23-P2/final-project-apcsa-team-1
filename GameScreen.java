@@ -231,20 +231,26 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
                   ArrayList<String> selected = new ArrayList<String>();
 					for(int i = 0; i < 6;i++) {
 						selected.add(getName(s.nextLine()));
-            selectedImages.add(imageFromName());
+            selectedImages.add(imageFromName(selected.get(i)));
 					}
 					ArrayList<Tower> towers = new ArrayList<Tower>(); 
           while(s.hasNextLine()){
             towers.add(getTowerFromString(s.nextLine()));
           }
          
-
-          if(map == 1){
-            game = new Game1(selected,selectedImages,towers.toArray(),money,wave);
-          } else {
-            game = new Game2(selected,selectedImages,towers.toArray(),money,wave);
+          Tower[] gameTowers = new Tower[towers.size()];
+          System.out.println(towers);
+          for(int i = 0; i < towers.size(); i++) {
+        	  gameTowers[i] = towers.get(i);
           }
-
+    	  
+          if(map == 1){
+            game = new Game1(selected,selectedImages,gameTowers,money,wave);
+          } else {
+            game = new Game2(selected,selectedImages,gameTowers,money,wave);
+          }
+          
+          state+=2;
                   
                   
 				} catch (FileNotFoundException e1) {
@@ -366,7 +372,7 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
             game.dealWithClick(e);
         }
     }
-    public String getName(Sring s){
+    public String getName(String s){
       if (s.contains("Snivy")) {
         return "Snivy";
       } else if (s.contains("Dreepy")) {
@@ -387,7 +393,6 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
         System.out.println("Invalid tower class");
         return null;
       }
-      return "";
     }
     
     // Return image given string
@@ -395,37 +400,33 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
       switch (s){
         case "Snivy":
           return snivyImg;
-          break;
-        case "Dreepy":
+	case "Dreepy":
           return dreepyImg;
-          break;
         case "Pichu":
-          reutrn pichuImg;
-          break;
+          return pichuImg;
         case "Charmander":
           return charmanderImg;
-          break;
         case "Sobble":
           return sobbleImg;
-          break;
         case "Magikarp":
           return magicarpImg;
-          break;
         case "Cleffa":
           return cleffaImg;
-          break;
         case "Honedge":
           return honedgeImg;
-          break;
         default:
           return null;
-          break;
       }
     }
 
     
     public Tower getTowerFromString(String s) {
+    	if(s.equals("null")) {
+    		return null;
+    	}
     	Scanner scan = new Scanner(s);
+    	System.out.println("S:" + s);
+    	String dummy = scan.next();
     	int tier = scan.nextInt();
     	int x = scan.nextInt();
     	int y = scan.nextInt();

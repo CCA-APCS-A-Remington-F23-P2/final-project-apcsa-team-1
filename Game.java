@@ -201,6 +201,10 @@ for(int i=0; i<20; i++){
         this.towerSlots = towerSlots;
         towers = new Tower[towerSlots.length];
     }
+    
+    public void coolSetTowerSlots(Button[] towerSlots) {
+    	this.towerSlots = towerSlots;
+    }
 
     public void setPath(Turn[] path) {
         this.path = path;
@@ -220,9 +224,10 @@ for(int i=0; i<20; i++){
       if(t != null){
         t.cast(enemies, projectiles);    
         if(t instanceof Cleffa && enemies.size() > 0){
-          if(Cleffa.cleffaCounter <= 0){
-            money += t.getMoneyAmount();
-            t.displayCoin(g);
+          Cleffa c = (Cleffa) t;
+        	if(Cleffa.cleffaCounter <= 0){
+            
+        	  money += c.getMoneyAmount();
           }
           Cleffa.cleffaCounter--;
         }

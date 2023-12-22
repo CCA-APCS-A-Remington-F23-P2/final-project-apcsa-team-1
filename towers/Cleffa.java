@@ -5,6 +5,7 @@ import Enemies.Enemy;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
+import java.io.IOException;
 import java.io.File;
 
 public class Cleffa extends Tower {
@@ -65,6 +66,10 @@ public class Cleffa extends Tower {
   }
 
   public void displayCoin(Graphics g){
+	  try {
     g.drawImage(ImageIO.read(new File("images/" + coinSprite + ".png")), getX() + 15, getY() - 50, null);
+	  } catch (IOException e) {
+		  System.out.println("There is no coin!!!");
+	  }
   }
 }
