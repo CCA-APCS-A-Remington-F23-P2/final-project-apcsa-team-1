@@ -3,7 +3,7 @@ import Enemies.Enemy;
 
 public class HydroPump extends HitScanAttack{
     public HydroPump(){
-        super(3, 75);
+        super(12, 75);
         setSprite("hydroPump");
     }
 }

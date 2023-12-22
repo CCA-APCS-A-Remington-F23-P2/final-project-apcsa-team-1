@@ -26,7 +26,6 @@ public class HitScanTower extends Tower {
       for (Enemy e : enemies) {
         int sqDistance = (int) Math.pow((getX() - e.getX()),2) + (int) Math.pow((getY() - e.getY()), 2);
         int sqRange = (int) Math.pow(getRange(),2);
-        System.out.println("enemy in range " + sqDistance);
         if (sqDistance <= sqRange && e.getDistTraveled() > furthestProgress) {
           
           targetIndex = i;
@@ -101,7 +100,7 @@ public class HitScanTower extends Tower {
 	      if(graphicAngle.equals("0")){
 	        // -->
 	        for(int x = 0; x < numTesselations; x++){
-	          g.drawImage(getAttack().getDirectionalSprite("0"), getX() + x*10, getY() + offset*x, null);
+	          g.drawImage(getAttack().getDirectionalSprite("0"), getX() - x*10, getY() + offset*x, null);
 	          // System.out.println("Drawing a thing");
 	          if(getAttack().getSprite().equals("waterGun")) {
 	        	  x++;
@@ -120,7 +119,7 @@ public class HitScanTower extends Tower {
 	      }else if(graphicAngle.equals("180")){
 	        // <--
 	        for(int x = 0; x < numTesselations; x++){
-	          g.drawImage(getAttack().getDirectionalSprite("180"), getX() - x*10, getY() + offset*x, null);
+	          g.drawImage(getAttack().getDirectionalSprite("180"), getX() + x*10, getY() + offset*x, null);
 	          // System.out.println("Drawing a thing");
 	          if(getAttack().getSprite().equals("waterGun")) {
 	        	  x++;

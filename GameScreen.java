@@ -376,9 +376,9 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
       if (s.contains("Snivy")) {
         return "Snivy";
       } else if (s.contains("Dreepy")) {
-        return "Snivy";
+        return "Dreepy";
       } else if (s.contains("Pichu")) {
-        return "Snivy";
+        return "Pichu";
       } else if (s.contains("Charmander")) {
         return "Charmander";   
       } else if (s.contains("Sobble")) {

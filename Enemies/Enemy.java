@@ -35,7 +35,7 @@ public class Enemy extends Entity {
 
   public void draw(Graphics g) {
     // System.out.println(self==null);
-    g.fillRect(getX(), getY(), getWidth(), getHeight());
+//    g.fillRect(getX(), getY(), getWidth(), getHeight());
     g.drawImage(self, getX(), getY(), null);
   }
 

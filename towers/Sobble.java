@@ -5,8 +5,8 @@ import javax.imageio.ImageIO;
 
 public class Sobble extends HitScanTower{
   public static final int PRICE = 30;
-  public static final int [] UPGRADE_PRICES = {75,150,250};
-  public static final int [] RANGES = {50,100,150,500};
+  public static final int [] UPGRADE_PRICES = {150,450,800};
+  public static final int [] RANGES = {80,120,160,500};
 
   public Sobble(int x, int y){
     super(new WaterGun(), UPGRADE_PRICES, RANGES, x, y);

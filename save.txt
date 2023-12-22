@@ -1,10 +1,10 @@
-2 98476 3 
-towers.Snivy
-towers.Snivy
-towers.Charmander
-towers.Honedge
+2 55 1 
+towers.Sobble
 towers.Magikarp
-towers.Cleffa
+towers.Honedge
+towers.Dreepy
+towers.Charmander
+towers.Pichu
 null
 null
 null
@@ -12,8 +12,8 @@ null
 null
 null
 null
+towers.Charmander 0 452 378
 null
 null
-towers.Honedge 3 630 275
 null
-null
+towers.Sobble 0 824 438

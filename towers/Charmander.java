@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class Charmander extends ProjectileTower{
   public static final int PRICE = 30;
-  public static final int [] UPGRADE_PRICES = {75,150,250};
+  public static final int [] UPGRADE_PRICES = {250,500,1000};
   public static final int [] RANGES = {70,80,90,110};
   public static final int [] ATTACK_DELAYS = {6, 2, 7, 6};
   

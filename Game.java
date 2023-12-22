@@ -67,7 +67,10 @@ public abstract class Game {
 
   private int startX;
   private int startY;
-
+  
+  private int endX;
+  private int endY;
+  
   private int waveDelay;
 
 
@@ -87,7 +90,7 @@ public abstract class Game {
 
     }
     gameFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
-      money = 100000;
+      money = 100;
     waveCount = 0;
     startX = x;
     startY = y;
@@ -326,7 +329,7 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
      if(rounds[waveCount].size()>0){
     	 System.out.println(waveDelay);
       if(waveDelay<=0){
-    	  waveDelay = 30;
+    	  waveDelay = 60;
         enemies.add(rounds[waveCount].get(0));
         enemies.get(enemies.size()-1).setXPos(startX);
         enemies.get(enemies.size()-1).setYPos(startY);
@@ -408,6 +411,7 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
       }
       g.drawImage(coin,20,500,null);
       g.setFont(gameFont);
+      g.setColor(Color.red);
       g.drawString("" + money,80,550);
       g.drawString("Wave: " + (waveCount+1),20,40);
       for(Enemy e : enemies){
@@ -418,8 +422,30 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         p.draw(g);
       }
       //FOR TURN TESTING
-      for(Turn t: path){
-        t.draw(g);
+//      for(Turn t: path){
+//        t.draw(g);
+//      }
+      if(time < 300) {
+	      g.setColor(Color.white);
+	      g.fillRect(0, 200, 400, 250);
+	      g.setColor(Color.black);
+	      g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+	      g.drawString("Hello! Welcome to our awesome Pokemon", 10, 215);
+	      g.drawString("tower defense game! Team The Bad Guys", 10, 230); 
+	      g.drawString("begun their invasion into our town, ", 10, 245);
+	      g.drawString("and we must defend it. At the beginning", 10, 260);
+	      g.drawString("of each round, enemies will start ", 10, 275);
+	      g.drawString("spawning. If they reach the end of the ", 10, 290);
+	      g.drawString("path, you lose, but if you manage to win", 10, 305);
+	      g.drawString("all 12 rounds, you win! To stop the enemies,", 10, 320); 
+	      g.drawString("place towers by first selecting a tower from ", 10, 335);
+	      g.drawString("the menu on the top of the screen and clicking", 10, 350); 
+	      g.drawString("the tower slots. You can also upgrade your", 10, 365);
+	      g.drawString("towers by clicking on them after selecting the", 10, 380);
+	      g.drawString("upgrade tool (green arrow button). Of course, all", 10, 395);
+	      g.drawString("this costs money, but killing enemies will give", 10, 410);
+	      g.drawString("money back. There are also different types of", 10, 425);
+	      g.drawString("enemies each with their own strengths and weaknesses!", 10, 440);
       }
     }
 
@@ -536,5 +562,10 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         }
         return false;
     } 
+    
+    public void setEnd(int x, int y) {
+    	endX = x;
+    	endY = y;
+    }
 
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ContraryLeafStorm extends HitScanAttack{
   
   public ContraryLeafStorm(){
-      super(4, 10);
+      super(4, 15);
       setSprite("contraryLeafStorm");
   }
 	public void cast(Enemy target, Tower t, ArrayList<Enemy> enemies){

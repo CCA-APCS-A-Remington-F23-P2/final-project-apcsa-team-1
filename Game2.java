@@ -33,6 +33,7 @@ public class Game2 extends Game{
     setGameTowers(gameTowers);
     setSelectCord(310,0);
     setMap(2);
+    setEnd(177, 162);
     try {
       setImg(ImageIO.read(new File("images/map 2.png")));
     } catch (IOException e) {
