@@ -8,7 +8,7 @@ import java.io.File;
 public class Rattata extends Enemy{
 
     public Rattata(int xp, int yp){
-           super(30, 5, xp, yp, 3);
+           super(100, 5, xp, yp, 3);
       try{
         setImage(ImageIO.read(new File("images/Ratata.png")));
         } catch (Exception e){

@@ -41,17 +41,23 @@ public class Projectile extends Entity{
     // and instead float endlessly into space with all the correct properties. It's really
     // scuffed but it'll work
     public Projectile(int speed, double angle, int x, int y, int damage, int range, int pierce){
-        super((int) (speed*Math.sin(angle)), (int) (speed*Math.cos(angle)), x, y);
+        super((int) (speed*Math.cos(angle)), (int) (speed*Math.sin(angle)), x, y);
         this.attackDamage = damage;
         this.range = range;
         this.pierce = pierce;
         this.enemiesHit = new ArrayList<Enemy>();
-        this.travel = 0;
+        this.travel = 0;//all are now transparent
     }
     
     // Deep copy constructor
     public Projectile(int speed, double angle, int x, int y, Projectile that) {
-    	this(speed, angle, x, y, that.getAttackDamage(), that.getRange(), that.getPierce());
+      super((int) (speed*Math.cos(angle)), (int) (speed*Math.sin(angle)), x, y);
+      this.attackDamage = that.getAttackDamage();
+      this.range = that.getRange();
+      this.pierce = that.getPierce();
+      this.enemiesHit = new ArrayList<Enemy>();
+      this.travel = 0;
+      this.sprite = that.getSprite();
     }
 
     public int getAttackDelay(){
@@ -154,8 +160,10 @@ public class Projectile extends Entity{
     	 * Returns true if move was successful
     	 * Returns false if maximum lifespan or pierce reached
     	 */
+
+      
     	this.move();
-    	travel += (int) Math.sqrt(getXSpeed()^2 + getYSpeed()^2);
+    	travel += (int) Math.hypot(getXSpeed(), getYSpeed());
     	if(travel >= getRange() || enemiesHit.size() >= getPierce()) {
     		return false;
     	}else {
@@ -173,18 +181,38 @@ public class Projectile extends Entity{
 
     public Image getDirectionalSprite(String direction){
       try{
-        return ImageIO.read(new File("images/projectile_sprites/" + getSprite() + "/" + getSprite() + direction));
+        return ImageIO.read(new File("images/projectile_sprites/" + getSprite() + "/" + getSprite() + direction + ".png"));
       } catch (IOException e){
+        System.out.println("Error loading sprite " + "images/projectile_sprites/" + getSprite() + "/" + getSprite() + direction + ".png: " + e);
         return null;
       }
     }
 
     public void draw(Graphics g){
-      double angle = Math.atan2(getYSpeed(), getXSpeed());
-      if(angle < 360){
+      double angle = Math.atan2(getYSpeed(), getXSpeed()) * 180 / Math.PI;
+      if(angle < 0){
         angle += 360.0;
       }
-      String direction = "";
+
+      String direction = ""; 
+
+      // FireBlastFragX is rendered differently (pentagonal) 
+      if(this instanceof FireBlastFragX){
+        if(angle < 36 || angle >= 324){
+          direction = "Right";
+        }else if(angle >= 36 && angle < 108){
+          direction = "Up";
+        }else if(angle >= 108 && angle < 180){
+          direction = "Left";
+        }else if(angle >= 180 && angle < 252){
+          direction = "DL";
+        }else if(angle >= 252 && angle < 324){
+          direction = "DR";
+        }
+        g.drawImage(getDirectionalSprite(direction), getX(), getY(), null);
+        return;
+      }
+    
       if(angle < 22.5 || angle >= 337.5){
         direction = "0";
       }else if(angle >= 22.5 && angle < 67.5){

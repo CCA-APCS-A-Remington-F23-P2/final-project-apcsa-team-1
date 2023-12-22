@@ -4,10 +4,10 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.File;
 
-public class Dialga extends Boss{
+public class Dialga extends Enemy{
 
     public Dialga (int xp, int yp){
-        super(250, 6, xp, yp, 200);
+        super(1500, 7, xp, yp, 200);
       try{
         setImage(ImageIO.read(new File("images/Dialga.png")));
       } catch (Exception e){

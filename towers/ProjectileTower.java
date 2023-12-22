@@ -9,6 +9,7 @@ import java.io.File;
 
 public class ProjectileTower extends Tower {
 	private Projectile attack;
+  private int attackDelay;
 
 	public ProjectileTower(Projectile attack, int[] upgradePrices, int[] ranges, int xPos, int yPos) {
 		super(upgradePrices, ranges, xPos, yPos);
@@ -31,12 +32,13 @@ public class ProjectileTower extends Tower {
 				i++;
 			}
 			if (targetIndex != -1) {
-        setAttackCounter(attack.getAttackDelay());
+        setAttackCounter(getAttackDelay());
 				Enemy target = enemies.get(targetIndex);
-				double angle = Math.atan2(getY() - target.getY(), getX() - target.getX());
+				double angle = Math.atan2(target.getY() - getY(), target.getX() - getX());
 				if(angle < 0) {
-					angle += 360.0;
+					angle += 2*Math.PI;
 				}
+        System.out.println("making a projectile");
 				projectiles.add(new Projectile((int) Math.hypot(attack.getXSpeed(), attack.getYSpeed()), angle, getX(), getY(), attack));
 			}
 		} else {
@@ -51,6 +53,14 @@ public class ProjectileTower extends Tower {
 	public void setAttack(Projectile attack) {
 		this.attack = attack;
 	}
+
+  public int getAttackDelay() {
+    return this.attackDelay;
+  }
+
+  public void setAttackDelay(int attackDelay) {
+    this.attackDelay = attackDelay;
+  }
   
   // synonyms Thank you for this very nice syntax !!!!!! - Noel y Zhang 2007 @ gmail.com 
   public Projectile getProjectile(){

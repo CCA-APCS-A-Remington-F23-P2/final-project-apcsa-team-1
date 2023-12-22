@@ -73,6 +73,7 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
     Game game;
 
     public GameScreen() {
+      // “Hello! Welcome to our awesome Pokemon tower defense game! Team the bad guys have begun their invasion into our town, and we must defend it. How to play: At the beginning of each round enemies will start spawning. If they reach the end of the path, you lose, but if you manage to survive all 12 rounds, you win! To stop the enemies from reaching the end of the path, you must place towers on the tower slots shown on the map. To place a tower, first select a tower from the menu on the top of the screen, and it should highlight the tower slot in green. Then, click one of the tower slots and it should place a tower there. You can also upgrade your towers by clicking on them after selecting the upgrade tool (green arrow button). Of course, all of this costs money, but killing enemies will give you money back. Each tower has its own attacks and attack speed, but all of them except Cleffa will attack the enemies directly. Cleffa doesn’t attack anything, but she uses her moon powers to print extra money. If you can’t place a tower or upgrade, you either don’t have enough money or it is the final upgrade in the line. There are also different types of enemies, each with their own strengths and weaknesses, but some you should look out for are Gengar, which turns invisible and intangible for a moment whenever it is hit, and Deoxys, which has 3 forms before it dies.”
     	gameToLoad = false;
         selection = new ArrayList < String > ();
         //CHECK IF THE GAME INFO FILE IS EMPTY OR NOT!
@@ -225,12 +226,27 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
 					Scanner forALine = new Scanner(line);
 					int map = forALine.nextInt();
 					int money  = forALine.nextInt();
-					int score = forALine.nextInt();
 					int wave = forALine.nextInt();
+                   ArrayList<Image> selectedImages = new ArrayList<Image>();
+                  ArrayList<String> selected = new ArrayList<String>();
 					for(int i = 0; i < 6;i++) {
-//						selectedTowers.add(s.nextLine().substring(i));
+						selected.add(getName(s.nextLine()));
+            selectedImages.add(imageFromName());
 					}
-					Tower[] towers = new Tower[11];
+					ArrayList<Tower> towers = new ArrayList<Tower>(); 
+          while(s.hasNextLine()){
+            towers.add(getTowerFromString(s.nextLine()));
+          }
+         
+
+          if(map == 1){
+            game = new Game1(selected,selectedImages,towers.toArray(),money,wave);
+          } else {
+            game = new Game2(selected,selectedImages,towers.toArray(),money,wave);
+          }
+
+                  
+                  
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -298,8 +314,8 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
                     selectionImg.remove(honedgeImg);
                 }
             } else if (magicarp.clicked(e)) {
-                if (!selection.remove("Magicarp")) {
-                    selection.add("Magicarp");
+                if (!selection.remove("Magikarp")) {
+                    selection.add("Magikarp");
                     selectionImg.add(magicarpImg);
 
                 } else {
@@ -350,36 +366,90 @@ public class GameScreen extends JPanel implements ActionListener, MouseListener 
             game.dealWithClick(e);
         }
     }
+    public String getName(Sring s){
+      if (s.contains("Snivy")) {
+        return "Snivy";
+      } else if (s.contains("Dreepy")) {
+        return "Snivy";
+      } else if (s.contains("Pichu")) {
+        return "Snivy";
+      } else if (s.contains("Charmander")) {
+        return "Charmander";   
+      } else if (s.contains("Sobble")) {
+        return "Sobble";
+      } else if (s.contains("Magikarp")) {
+        return "Magikarp";
+      } else if (s.contains("Cleffa")) {
+        return "Cleffa";
+      } else if (s.contains("Honedge")) {
+        return "Honedge";
+      } else {
+        System.out.println("Invalid tower class");
+        return null;
+      }
+      return "";
+    }
+    
+    // Return image given string
+    public Image imageFromName(String s){
+      switch (s){
+        case "Snivy":
+          return snivyImg;
+          break;
+        case "Dreepy":
+          return dreepyImg;
+          break;
+        case "Pichu":
+          reutrn pichuImg;
+          break;
+        case "Charmander":
+          return charmanderImg;
+          break;
+        case "Sobble":
+          return sobbleImg;
+          break;
+        case "Magikarp":
+          return magicarpImg;
+          break;
+        case "Cleffa":
+          return cleffaImg;
+          break;
+        case "Honedge":
+          return honedgeImg;
+          break;
+        default:
+          return null;
+          break;
+      }
+    }
+
     
     public Tower getTowerFromString(String s) {
     	Scanner scan = new Scanner(s);
-    	String dummy = scan.next();
-    	String className = scan.next();
     	int tier = scan.nextInt();
     	int x = scan.nextInt();
     	int y = scan.nextInt();
-    	if (s.equals("towers.Snivy")) {
+    	if (s.contains("Snivy")) {
     		return new Snivy(x, y, tier);
-        } else if (s.equals("towers.Dreepy")) {
+        } else if (s.contains("Dreepy")) {
             return new Dreepy(x, y, tier);
-        } else if (s.equals("towers.Pichu")) {
+        } else if (s.contains("Pichu")) {
         	return new Pichu(x, y, tier);
-        } else if (s.equals("towers.Charmander")) {
+        } else if (s.contains("Charmander")) {
             return new Charmander(x, y, tier);
-        } else if (s.equals("towers.Sobble")) {
+        } else if (s.contains("Sobble")) {
             return new Sobble(x, y, tier);
-        } else if (s.equals("towers.Magikarp")) {
+        } else if (s.contains("Magikarp")) {
             return new Magikarp(x, y, tier);
-        } else if (s.equals("towers.Cleffa")) {
+        } else if (s.contains("Cleffa")) {
             return new Cleffa(x, y, tier);
-        } else if (s.equals("towers.Honedge")) {
+        } else if (s.contains("Honedge")) {
             return new Honedge(x, y, tier);
         } else {
         	System.out.println("Invalid tower class");
         	return null;
         }
     }
-
 
 
     public void mouseEntered(MouseEvent e) {

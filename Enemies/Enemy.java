@@ -1,13 +1,13 @@
 package Enemies;
 
-import java.util.ArrayList; 
+import Turn.Turn;
+import java.util.ArrayList;
 import Entity.Entity;
 import java.awt.Image;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.io.File;
 import javax.imageio.ImageIO;
-
 
 public class Enemy extends Entity {
   private int maxHp;
@@ -21,7 +21,9 @@ public class Enemy extends Entity {
   private Image self;
 
   public Enemy(int mhp, int speed, int xp, int yp, int money) {
-    super(0-speed, 0, xp, yp);
+    super(0 - speed, 0, xp, yp);
+    setWidth(45);
+    setHeight(45);
     this.speed = speed;
     this.maxHp = mhp;
     hp = mhp;
@@ -31,8 +33,9 @@ public class Enemy extends Entity {
     this.money = money;
   }
 
-  public void draw(Graphics g){
-	  System.out.println(self==null);
+  public void draw(Graphics g) {
+    // System.out.println(self==null);
+    g.fillRect(getX(), getY(), getWidth(), getHeight());
     g.drawImage(self, getX(), getY(), null);
   }
 
@@ -52,7 +55,7 @@ public class Enemy extends Entity {
     maxHp = s;
   }
 
-  public void setImage(Image self){
+  public void setImage(Image self) {
     this.self = self.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
   }
 
@@ -117,4 +120,23 @@ public class Enemy extends Entity {
     super.move();
     distTraveled += speed;
   }
+
+  public void makeTurn(Turn t) {
+    if (t.didCollide(this)) {
+      if (t.getDirection().equals("up")) {
+        setYSpeed(-(getSpeed()));
+        setXSpeed(0);
+      } else if (t.getDirection().equals("right")) {
+        setXSpeed(getSpeed());
+        setYSpeed(0);
+      } else if (t.getDirection().equals("down")) {
+        setYSpeed(getSpeed());
+        setXSpeed(0);
+      } else if (t.getDirection().equals("left")) {
+        setXSpeed(-getSpeed());
+        setYSpeed(0);
+      }
+    }
+  }
+
 }

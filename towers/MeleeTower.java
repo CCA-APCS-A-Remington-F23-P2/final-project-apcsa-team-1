@@ -22,7 +22,10 @@ public class MeleeTower extends Tower {
 		int i = 0;
 		if (getAttackCounter() <= 0) {
 			for (Enemy e : enemies) {
-				int distance = (int) Math.sqrt((getX() - e.getX()) ^ 2 + (getY() - e.getY()) ^ 2);
+				int distance = (int) Math.hypot(getX() - e.getX(), getY() - e.getY());
+        // System.out.println(getX() + ", " + getY());
+        // System.out.println(e.getX() + ", " + e.getY());
+        // System.out.println(distance);
 				if (distance <= getRange() && e.getDistTraveled() > furthestProgress) {
 					targetIndex = i;
 					furthestProgress = e.getDistTraveled();

@@ -4,10 +4,10 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.File;
 
-public class DeoxysSpeed extends Boss{
+public class DeoxysSpeed extends Enemy{
 
     public DeoxysSpeed(int xp, int yp){
-        super(50, 15, xp, yp, 100);
+        super(750, 1, xp, yp, 100);
     }
 
 }

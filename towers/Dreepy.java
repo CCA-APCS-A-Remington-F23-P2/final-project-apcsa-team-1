@@ -8,9 +8,11 @@ public class Dreepy extends ProjectileTower{
   public static final int PRICE = 100;
   public static final int [] UPGRADE_PRICES = {125,250,400};
   public static final int [] RANGES = {40,80,100,250};
+  public static final int [] ATTACK_DELAYS = {3, 3, 2, 2};
 
     public Dreepy(int x, int y){
       super(new Hex(1000, 1000, 0), UPGRADE_PRICES, RANGES ,x, y);
+      setAttackDelay(ATTACK_DELAYS[0]);
       try{
       setImage(ImageIO.read(new File("images/Dreepy.png")));
       } catch (Exception e){
@@ -55,6 +57,7 @@ public class Dreepy extends ProjectileTower{
         } else if (getTier()==3){
           setAttack(new DragonBarrage(1000, 1000, 0));
         }
+        setAttackDelay(ATTACK_DELAYS[getTier()]);
     }
       return cost;
     }

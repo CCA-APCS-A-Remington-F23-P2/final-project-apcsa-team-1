@@ -88,7 +88,7 @@ public class Tower implements Serializable{
 
   
 	public String getInfo() {
-		return "" + getClass() + " " + getTier() + " " + xPos + " " + yPos;
+		return "" + getClass().getName() + " " + getTier() + " " + xPos + " " + yPos;
 	}
 
   public boolean canAttack(Enemy e){

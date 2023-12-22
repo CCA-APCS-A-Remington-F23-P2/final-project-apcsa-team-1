@@ -10,12 +10,12 @@ public abstract class Entity{
     private int height;
 
     public Entity(int speed, int xp, int yp){
-        xPos = xp;
-        yPos = yp;
-        xSpeed = speed;
-        ySpeed = 0;
-        width = 20;
-    	height = 20;
+      xPos = xp;
+      yPos = yp;
+      xSpeed = speed;
+      ySpeed = 0;
+      width = 20;
+      height = 20;
     }
     
     public Entity(int speed, int xp, int yp, int w, int h) {

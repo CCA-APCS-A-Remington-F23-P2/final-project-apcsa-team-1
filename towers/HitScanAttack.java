@@ -29,7 +29,7 @@ public class HitScanAttack extends Attack{
 
     public Image getDirectionalSprite(String angle){
       try{
-        return ImageIO.read(new File("images/hitscan_sprites/" + getSprite() + "/" + getSprite() + angle));
+        return ImageIO.read(new File("images/hitscan_sprites/" + getSprite() + "/" + getSprite() + angle + ".png"));
       }
       catch(IOException e){
         return null;

@@ -1,5 +1,6 @@
 // import java.lang.reflect.Constructor;
 import Enemies.*;
+import Turn.Turn;
 import java.util.ArrayList;
 import towers.*;
 import java.awt.Color;
@@ -37,9 +38,9 @@ public abstract class Game {
     private int time;
     private int counter;
     private int money;
-    private int score;
     
     private ArrayList<Enemy>[] rounds;
+    private String[] explanations;
     private int waveCount;
 
     private Button[] towerSlots;
@@ -87,7 +88,6 @@ public abstract class Game {
     }
     gameFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
       money = 100000;
-      score = 0;
     waveCount = 0;
     startX = x;
     startY = y;
@@ -171,22 +171,32 @@ for(int i=0; i<20; i++){
     rounds[9].add(new Gengar(startX, startY));
 
     //round 11
-    rounds[10].add(new DeoxysAttack(startX, startY));
+    for(int i=0; i<20; i++){
+      rounds[10].add(new Blaziken(startX, startY));
+      rounds[10].add(new Geodude(startX, startY));
+      rounds[10].add(new Geodude(startX, startY));
+      rounds[10].add(new Pigeot(startX, startY));
+    }
+
+    //round 12
+    rounds[11].add(new DeoxysAttack(startX, startY));
   }
 
     public int getMoney() {
         return money;
     }
-    public int getScore() {
-        return score;
-    }
+  
     public void setMoney(int m) {
         money = m;
     }
-    public void setScore(int s) {
-        score = s;
+    public void setWaveCount(int waveCount){
+      this.waveCount = waveCount;
     }
 
+  public void setGameTowers(Tower[] t){
+    towers = t;
+  }
+  
     public void setTowerSlots(Button[] towerSlots) {
         this.towerSlots = towerSlots;
         towers = new Tower[towerSlots.length];
@@ -205,24 +215,59 @@ for(int i=0; i<20; i++){
   public void update(){
     time++;
     
-
     // Cast towers (attacks)
     for(Tower t: towers){
       if(t != null){
         t.cast(enemies, projectiles);    
+        if(t instanceof Cleffa && enemies.size() > 0){
+          if(Cleffa.cleffaCounter <= 0){
+            money += t.getMoneyAmount();
+            t.displayCoin(g);
+          }
+          Cleffa.cleffaCounter--;
+        }
       }
+    }
+    Cleffa.cleffaCounter--;
+    if(Cleffa.cleffaCounter <= 0){
+      Cleffa.cleffaCounter = 20;
     }
 
     // Move projectiles
     for(int p = 0; p < projectiles.size(); p++){
       Projectile proj = projectiles.get(p);
-      proj.moveAndCheck();
+      if(!proj.moveAndCheck()){
+        // Projectile is expired!
+
+        // FireBlast: summon four FireBlastFrags in all four directions
+        if(proj.getSprite().equals("fireBlast")){
+          System.out.println("Fire blast explosion");
+          
+          projectiles.add(new FireBlastFrag(proj.getX(), proj.getY(), 0));
+          projectiles.add(new FireBlastFrag(proj.getX(), proj.getY(), Math.PI/2));
+          projectiles.add(new FireBlastFrag(proj.getX(), proj.getY(), Math.PI));
+          projectiles.add(new FireBlastFrag(proj.getX(), proj.getY(), 3*Math.PI/2));
+        }
+
+        if(proj.getSprite().equals("fireBlastX")){
+          System.out.println("Fire blast X explosion");
+          
+          projectiles.add(new FireBlastFragX(proj.getX(), proj.getY(), 0));
+          projectiles.add(new FireBlastFragX(proj.getX(), proj.getY(), 2*Math.PI / 5));
+          projectiles.add(new FireBlastFragX(proj.getX(), proj.getY(), 4*Math.PI / 5));
+          projectiles.add(new FireBlastFragX(proj.getX(), proj.getY(), 6*Math.PI / 5));
+          projectiles.add(new FireBlastFragX(proj.getX(), proj.getY(), 8*Math.PI / 5));
+        }
+        projectiles.remove(p);
+        p--;
+        continue; 
+      }
       
       for(int e = 0; e < enemies.size(); e++){
         Enemy en = enemies.get(e);
         if(en.didCollide(proj) && !proj.getEnemiesHit().contains(e)){
           en.takeDamage(proj.getAttackDamage());
-          proj.hitEnemy(en);
+          projectiles.get(p).hitEnemy(en);
         }
       } 
     }
@@ -231,9 +276,9 @@ for(int i=0; i<20; i++){
     for(int e = 0; e < enemies.size(); e++){
       Enemy en = enemies.get(e);
       for(Turn t: path){
-        t.makeTurn(en);
+        en.makeTurn(t);
       }
-      if(time % 10==0){
+      if(time % 5 == 0 || en instanceof DeoxysSpeed){
         en.move();
       }
       if(en.isDead()){
@@ -246,7 +291,7 @@ for(int i=0; i<20; i++){
         enemies.get(enemies.size()-1).setDistTraveled(en.getDistTraveled()+4);
         enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         }
-        if(en instanceof Reuniclus){
+        else if(en instanceof Reuniclus){
           enemies.add(new Duosion(en.getX(), en.getY()));
           if(en.getYSpeed() > 0) enemies.add(new Duosion(en.getX(), en.getY()-4));
           else if(en.getYSpeed() < 0) enemies.add(new Duosion(en.getX(), en.getY()+4));
@@ -255,6 +300,14 @@ for(int i=0; i<20; i++){
 enemies.get(enemies.size()-1).setDistTraveled(en.getDistTraveled()+4);
 enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
 }
+        else if(en instanceof DeoxysAttack){
+          enemies.add(new DeoxysDefense(en.getX(), en.getY()));
+          enemies.get(enemies.size()-1).setDistTraveled(5);
+        }
+        else if(en instanceof DeoxysDefense){
+          enemies.add(new DeoxysSpeed(en.getX(), en.getY()));
+          enemies.get(enemies.size()-1).setDistTraveled(5);
+        }
         money += en.getMoney();
         enemies.remove(e);
         e--;
@@ -264,11 +317,11 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
 
 
     //Waves 
-    System.out.println(enemies);
+    // System.out.println(enemies);
      if(rounds[waveCount].size()>0){
     	 System.out.println(waveDelay);
       if(waveDelay<=0){
-    	  waveDelay = 20;
+    	  waveDelay = 30;
         enemies.add(rounds[waveCount].get(0));
         enemies.get(enemies.size()-1).setXPos(startX);
         enemies.get(enemies.size()-1).setYPos(startY);
@@ -292,9 +345,9 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
 
   public void saveGame(){
     try{
-      String s = ""+mapNumber+" "+money+" "+score+" "+(waveCount+1)+" ";
+      String s = ""+mapNumber+" "+money+" "+(waveCount+1)+" ";
       for(Tower t : selectedTowers) {
-    	  s+="\n" + t.getInfo();
+    	  s+="\n" + t.getClass().getName();
       }
       for(Tower t: towers){
     	s+= "\n";
@@ -329,7 +382,7 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
             selectedTowers.add(new Charmander(0, 0));
         } else if (s.equals("Sobble")) {
             selectedTowers.add(new Sobble(0, 0));
-        } else if (s.equals("Magicarp")) {
+        } else if (s.equals("Magikarp")) {
             selectedTowers.add(new Magikarp(0, 0));
         } else if (s.equals("Cleffa")) {
             selectedTowers.add(new Cleffa(0, 0));
@@ -347,19 +400,21 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
         if(t!=null){
           t.draw(g);
         }
-
       }
       g.drawImage(coin,20,500,null);
       g.setFont(gameFont);
       g.drawString("" + money,80,550);
-      g.drawString("Wave: " + waveCount,20,40);
+      g.drawString("Wave: " + (waveCount+1),20,40);
       for(Enemy e : enemies){
         e.draw(g);
 //        System.out.println("test");
       }
-
       for(Projectile p: projectiles){
         p.draw(g);
+      }
+      //FOR TURN TESTING
+      for(Turn t: path){
+        t.draw(g);
       }
     }
 
@@ -384,11 +439,12 @@ enemies.get(enemies.size()-2).setDistTraveled(en.getDistTraveled());
       //for noel testing
       System.out.println(e.getX() + ", " + e.getY());
       
-        if(nextWave.clicked(e) && enemies.size()==0){
+        if(nextWave.clicked(e) && enemies.size()==0 && rounds[waveCount].size() == 0){
           waveCount++;
           nextWave.setImg(null);
           return;
         }
+      
         for(int i = 0; i < options.length; i++){
           if(options[i].clicked(e)){
             if(selected == null && !upgrade){

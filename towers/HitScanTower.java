@@ -18,7 +18,7 @@ public class HitScanTower extends Tower {
   }
 
   public void cast(ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles) {
-	System.out.println(getAttackCounter());
+	// System.out.println(getAttackCounter());
 	int targetIndex = -1;
     int furthestProgress = -1;
     int i = 0;
@@ -58,14 +58,15 @@ public class HitScanTower extends Tower {
   public void draw(Graphics g){
     super.draw(g);
     if(target !=null){
+      // System.out.println("Drawing sprites");
       // Draw a graphic connecting the tower to the enemy
       // Special cases: megaWaterfall, waterfall, thunder all just spawn a graphic on the target
       // waterGun tesselates every 20 (sorry)
       if(getAttack().getSprite().equals("megaWaterfall") || getAttack().getSprite().equals("waterfall") || getAttack().getSprite().equals("thunder")) {
     	  g.drawImage(getAttack().getDirectionalSprite(""), target.getX(), target.getY(), null);
       }else {
-	      double angle = Math.atan2(getY() - target.getY(), getX() - target.getX());
-	      if(angle < 360.0){
+	      double angle = Math.atan2(getY() - target.getY(), getX() - target.getX()) * 180 / Math.PI;
+	      if(angle < 0.0){
 	        angle += 360.0;
 	      }
 	      String graphicAngle = "";
@@ -81,7 +82,7 @@ public class HitScanTower extends Tower {
 	        graphicAngle = "270";
 	        vertical = true;
 	      }else{
-	        System.out.println("What the heck bro Skibidi Ohio Gyatt Rizz");
+	        System.out.println("Invalid angle");
 	      }
 	      System.out.println(graphicAngle);
 	      int numTesselations;
@@ -101,7 +102,7 @@ public class HitScanTower extends Tower {
 	        // -->
 	        for(int x = 0; x < numTesselations; x++){
 	          g.drawImage(getAttack().getDirectionalSprite("0"), getX() + x*10, getY() + offset*x, null);
-	          System.out.println("Drawing a thing");
+	          // System.out.println("Drawing a thing");
 	          if(getAttack().getSprite().equals("waterGun")) {
 	        	  x++;
 	          }
@@ -111,7 +112,7 @@ public class HitScanTower extends Tower {
 	        // |
 	        for(int y = 0; y < numTesselations; y++){
 	          g.drawImage(getAttack().getDirectionalSprite("90"), getX() + offset*y, getY() - y*10 , null);
-	          System.out.println("Drawing a thing");
+	          // System.out.println("Drawing a thing");
 	          if(getAttack().getSprite().equals("waterGun")) {
 	        	  y++;
 	          }
@@ -120,7 +121,7 @@ public class HitScanTower extends Tower {
 	        // <--
 	        for(int x = 0; x < numTesselations; x++){
 	          g.drawImage(getAttack().getDirectionalSprite("180"), getX() - x*10, getY() + offset*x, null);
-	          System.out.println("Drawing a thing");
+	          // System.out.println("Drawing a thing");
 	          if(getAttack().getSprite().equals("waterGun")) {
 	        	  x++;
 	          }
@@ -130,7 +131,7 @@ public class HitScanTower extends Tower {
 	        // V
 	        for(int y = 0; y < numTesselations; y++){
 	          g.drawImage(getAttack().getDirectionalSprite("270"), getX() + offset*y, getY() + y*10, null);
-	          System.out.println("Drawing a thing");
+	          // System.out.println("Drawing a thing");
 	          if(getAttack().getSprite().equals("waterGun")) {
 	        	  y++;
 	          }

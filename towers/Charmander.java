@@ -7,11 +7,12 @@ import javax.imageio.ImageIO;
 public class Charmander extends ProjectileTower{
   public static final int PRICE = 30;
   public static final int [] UPGRADE_PRICES = {75,150,250};
-  public static final int [] RANGES = {40,50,60,60};
-  
+  public static final int [] RANGES = {70,80,90,110};
+  public static final int [] ATTACK_DELAYS = {6, 2, 7, 6};
   
   public Charmander(int x, int y){
     super(new Ember(1000, 1000, 0.0), UPGRADE_PRICES, RANGES ,x, y);
+    setAttackDelay(ATTACK_DELAYS[0]);
     try{
     setImage(ImageIO.read(new File("images/Charmander.png")));
     } catch (Exception e){
@@ -59,6 +60,7 @@ public class Charmander extends ProjectileTower{
 
         }
     }
+      setAttackDelay(ATTACK_DELAYS[getTier()]);
     }
     return cost;
   }

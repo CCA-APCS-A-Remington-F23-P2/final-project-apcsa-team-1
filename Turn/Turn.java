@@ -1,5 +1,9 @@
+package Turn;
+
 import Enemies.Enemy;
 import Entity.Entity;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Turn extends Entity{
     private String direction;
@@ -28,28 +32,10 @@ public class Turn extends Entity{
         direction = input;
     }
 
-  public void makeTurn(Enemy e){
-    if(this.didCollide(e)){
-      if(direction.equals("up")){
-        e.setYSpeed(-(e.getSpeed()));
-        e.setXSpeed(0);
-      }
-      if(direction.equals("right")){
-        e.setXSpeed(e.getSpeed());
-        e.setYSpeed(0);
-      }
-      if(direction.equals("down")){
-        e.setYSpeed(e.getSpeed());
-        e.setXSpeed(0);
-      }
-      if(direction.equals("left")){
-        e.setXSpeed(-e.getSpeed());
-        e.setYSpeed(0);
-      }
-    }
+
+  //ONLY FOR TESTING
+  public void draw(Graphics g){
+    g.fillRect(getX(), getY(), getWidth(), getHeight());
   }
-
-
-
 
 }

@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 public class Honedge extends MeleeTower{
   public static final int PRICE = 75;
   public static final int [] UPGRADE_PRICES = {125,250,500};
-  public static final int [] RANGES = {50,60,80,120};
+  public static final int [] RANGES = {50,50,50,75};
 
   public Honedge(int x, int y){
     super(new Slash(), UPGRADE_PRICES, RANGES, x, y);

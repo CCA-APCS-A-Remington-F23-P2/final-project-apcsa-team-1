@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 public class Magikarp extends HitScanTower{
   public static final int PRICE = 50;
   public static final int [] UPGRADE_PRICES = {75,500,1000};
-  public static final int [] RANGES = {50,50,100,250};
+  public static final int [] RANGES = {50,50,100,150};
 
   public Magikarp(int x, int y){
     super(new Splash(), UPGRADE_PRICES, RANGES, x, y);

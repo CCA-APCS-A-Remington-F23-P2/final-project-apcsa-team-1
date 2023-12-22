@@ -1,0 +1,19 @@
+2 99605 0 1 
+class towers.Snivy 0 0 0
+class towers.Honedge 0 0 0
+class towers.Sobble 0 0 0
+class towers.Cleffa 0 0 0
+class towers.Magikarp 0 0 0
+class towers.Pichu 0 0 0
+null
+null
+null
+null
+null
+null
+class towers.Honedge 0 370 266
+class towers.Pichu 0 452 378
+null
+class towers.Snivy 0 630 275
+null
+class towers.Sobble 2 824 438
