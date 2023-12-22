@@ -51,7 +51,7 @@ public class Game1 extends Game {
       towerSlots[10] = new Button(860, 469, 55, 55);
       towerSlots[11] = new Button(860, 415, 55, 55);
       towerSlots[12] = new Button(801, 469, 55, 55);
-     setTowerSlots(towerSlots);
+     coolSetTowerSlots(towerSlots);
       Turn[] path = new Turn[10]; 
       path[0] = new Turn(920, 250, "up");
       path[1] = new Turn(945, 61, "left");
